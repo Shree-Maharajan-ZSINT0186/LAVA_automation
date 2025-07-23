@@ -4,8 +4,8 @@ Feature: Create new title
   @launch
   Scenario: Create new title
 
-    Given Launch the application
-    And Navigate to the standalone title tab and clicks add icon
+    Given Launch workbench the application
+#    And Navigate to the standalone title tab and clicks add icon
 
 
 #  @createTitleAndParcles

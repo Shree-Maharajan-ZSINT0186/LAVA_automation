@@ -81,17 +81,17 @@ public class YamlLoader {
         return value;
     }
     
-    public static String getUserNameAndPasswordFromYamlBasedOnURL(String fileName, String key) throws FileNotFoundException{
+    public static String getUserNameAndPasswordFromYamlBasedOnURL(String fileName,String userTyp, String key) throws FileNotFoundException{
     	Map<String, Object> testDataValues;
     	String envVal = "";
     	String value = null;
         try{
-        	testDataValues=loadYamlFile(fileName);
-        	envVal = String.valueOf(testDataValues.get("Users"));
+//        	testDataValues=loadYamlFile(fileName);
+//        	envVal = String.valueOf(testDataValues.get("Users"));
         	try(InputStream input = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\yaml\\" + fileName)) {
 	        	Yaml yaml = new Yaml();
 	            Map<String, Map<String, String>> config = yaml.load(input);
-	            Map<String, String> environmentData = config.get(envVal);
+	            Map<String, String> environmentData = config.get(userTyp);
 	            Object retrivedValue = environmentData.get(key);       
 	            if (retrivedValue instanceof Integer) {
 	                value = Integer.toString((Integer) retrivedValue);

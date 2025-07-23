@@ -38,7 +38,7 @@ public class CreateApplicationStepDef extends FakerClassLibrary{
 	    
 		try {
 			//ExtentReportSetup.test = ExtentReportSetup.createtheTest("Login To LAC");
-			WebActions.launchApplication();
+			WebActions.launchApplication("Agent_host");
 
 			WebActions.waitForElementToVisible(loginLocators, "loginPageTitle");
 			
@@ -51,10 +51,10 @@ public class CreateApplicationStepDef extends FakerClassLibrary{
 			Utils.stepInfoLog("The added tenant value is: " +tenantValue);
 			
 			//Entering Username and Password
-			String userName = YamlLoader.getUserNameAndPasswordFromYamlBasedOnURL(yamlFileName, "Agent_username");
-			String Password = YamlLoader.getUserNameAndPasswordFromYamlBasedOnURL(yamlFileName, "Agent_password");
+			String userName = YamlLoader.getUserNameAndPasswordFromYamlBasedOnURL(yamlFileName, "Agent","Agent_username");
+			String Password = YamlLoader.getUserNameAndPasswordFromYamlBasedOnURL(yamlFileName, "Agent","Agent_password");
 			WebActions.enterTextOn(loginLocators, "agentUsernameTextbox", userName);
-			WebActions.enterTextOn(loginLocators, "agentPasswordTextbox", Password);
+			WebActions.enterTextOn(loginLocators, "agentPasswordTextbox", WebActions.decodeTheGivenValue(Password));
 			
 			//Clicking the Submit button
 			WebActions.clickOn(loginLocators, "submitButton");

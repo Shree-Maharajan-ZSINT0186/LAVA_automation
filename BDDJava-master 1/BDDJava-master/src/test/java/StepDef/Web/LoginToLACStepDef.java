@@ -68,8 +68,8 @@ public class LoginToLACStepDef{
 	@When("Agent enter {string} and {string}")
 	public void agentEnterTheUserNameAndPassword(String username, String password) throws Throwable {
 		try {
-			String userName = YamlLoader.getUserNameAndPasswordFromYamlBasedOnURL(yamlFileName, "Agent_username");
-			String Password = YamlLoader.getUserNameAndPasswordFromYamlBasedOnURL(yamlFileName, "Agent_password");
+			String userName = YamlLoader.getUserNameAndPasswordFromYamlBasedOnURL(yamlFileName, "Agent","Agent_username");
+			String Password = YamlLoader.getUserNameAndPasswordFromYamlBasedOnURL(yamlFileName, "Agent","Agent_password");
 			WebActions.enterTextOn(loginLocators, "agentUsernameTextbox", userName);
 			WebActions.enterTextOn(loginLocators, "agentPasswordTextbox", WebActions.decodeTheGivenValue(Password));
 			Utils.passedTestLog("Username and password are entered sucessfully");

@@ -38,13 +38,13 @@ PrePRODUCTION4:
   
 PRODUCTION:
 
-  host: http://agent.test.lava.landadmin.com/#/auth/login
-  host2: http://workbench.test.lava.landadmin.com/#/auth/login
+  Agent_host: http://agent.test.lava.landadmin.com/#/auth/login
+  Examiner_host: http://workbench.test.lava.landadmin.com/#/auth/login
   
 Agent:
    Agent_username : Jessica
-   Agent_password : Shree@123
+   Agent_password : U2hyZWVAMTIz
 
 Examiner:
-   Examiner_username : Jessica
-   Examiner_password : Shree@123
+   Examiner_username : Carolyn
+   Examiner_password : U2hyZWVAMTIz

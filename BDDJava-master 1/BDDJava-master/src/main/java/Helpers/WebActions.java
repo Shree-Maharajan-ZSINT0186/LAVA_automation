@@ -222,9 +222,9 @@ public class WebActions {
 	 * Method Description: This method is used to Launch the application
 	 * @throws Throwable
 	 */
-	public static void launchApplication() throws Throwable{
+	public static void launchApplication(String hostKey) throws Throwable{
 		try{
-			String host= YamlLoader.getHostFromYamlBasedOnEnv(yamlFileName, "host");
+			String host= YamlLoader.getHostFromYamlBasedOnEnv(yamlFileName, hostKey);
 			if (driver != null) {
 				System.out.println("Driver is initialized successfully."+driver);
 			} else {
