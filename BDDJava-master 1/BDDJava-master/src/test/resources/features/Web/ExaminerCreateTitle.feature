@@ -4,10 +4,10 @@ Feature: Create new title
   @launch
   Scenario: Create new title
 
-    Given Launch workbench the application
+    Given Launch the application
 #    And Navigate to the standalone title tab and clicks add icon
-
-
+#
+#
 #  @createTitleAndParcles
 #  Scenario: Add Titles and Parcels
 #    When Agent should be navigated to the Title tab
