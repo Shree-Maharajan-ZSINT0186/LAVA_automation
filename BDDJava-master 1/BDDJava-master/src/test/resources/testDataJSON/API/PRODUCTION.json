@@ -1,0 +1,36 @@
+{
+	"@uploadImage": {
+		"petId": 234,
+		"additionalMetadata": "string",
+		"file": "\\src\\test\\resources\\testDataJSON\\API\\imgres.htm"
+	},
+	"@newPetStore": {
+		"id": 0,
+		"category": {
+			"id": 0,
+			"name": "string"
+		},
+		"name": "doggie",
+		"photoUrls": [
+			"string"
+		],
+		"tags": [
+			{
+				"id": 0,
+				"name": "string"
+			}
+		],
+		"status": "available"
+	},
+	"@Books": {
+		"BookId": 2,
+		"tokenID": "2fad838d2e26504ceab3879ec28fd4508cfd783eee8351d8b515668d3c4d19a6"
+	},
+	"@BookOrder": {
+		"bookId": 1,
+		"customerName": "John"
+	},
+	"@EditOrder": {
+		"orderID": "k4cmMAWwjdkuO2zDzrzri"
+	}
+}

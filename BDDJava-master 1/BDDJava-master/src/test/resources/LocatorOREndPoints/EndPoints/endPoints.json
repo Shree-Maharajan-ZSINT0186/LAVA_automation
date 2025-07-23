@@ -1,0 +1,10 @@
+{
+	"uploadImage": "/pet/{Param}/uploadImage",
+	"newPetStore": "/pet",
+	"getPetID": "/pet/{Param}",
+	"deletePet": "/pet/{Param}",
+	"baseUrl": "https://simple-books-api.glitch.me",
+	"getBookId": "/books?{Param}",
+	"postOrder": "/orders",
+	"patchOrder": "/orders/{Param}"
+}

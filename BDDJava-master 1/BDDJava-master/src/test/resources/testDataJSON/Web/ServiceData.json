@@ -1,0 +1,15 @@
+{
+	"Service": {
+		"serviceName": "Mortgage Registration",
+		"documentId": "DOC0484",
+		"confirmPass": "Password@123",
+		"typeValue": "Accelerated",
+		"amountValue": "900000"
+	},
+	"validation": {
+		"MortgageRegValidation1": "RRR not selected",
+		"MortgageRegValidation2": "Rightholder(s) not selected",
+		"MortgageRegValidation3": "The number of documents do not satisfy the requirements",
+		"validationSucessMsg": "Service is valid"
+	}
+}

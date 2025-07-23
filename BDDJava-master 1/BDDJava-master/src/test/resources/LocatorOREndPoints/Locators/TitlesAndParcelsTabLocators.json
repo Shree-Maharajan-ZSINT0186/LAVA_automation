@@ -1,0 +1,17 @@
+{
+"titlesAndParcelsTab": "xpath:://aside[@id='tab-titles-and-parcels']",
+"titlesSearchIcon": "xpath:://lava-btn[@id='icon-search-titles']",
+"addTitlesSearchIcon": "id::btn-application-search",
+"titleIdTextBox": "xpath:://input[@id='titleId']",
+"titleIDCheckbox": "xpath:://input[@aria-label='Press Space to toggle row selection (unchecked)']",
+"titleAddButton": "xpath:://lava-btn[@id='btn-add-Titles']",
+"parcelsSearchIcon":" xpath:://lava-btn[@id='icon-search-parcels']",
+"addParcelsSearchIcon": "xpath:://lava-btn-search[@class='lava-btn-primary lava-btn-3xl']",
+"parcelIdTextBox": "xpath:://input[@id='parcelId']",
+"parcelIDCheckbox": "xpath:://div[@class='ag-body-viewport ag-selectable ag-layout-normal ag-row-no-animation']//input[@type='checkbox']",
+"parcelAddButton": "xpath::(//span[@class='button-content-wrapper ng-star-inserted']//span)[3]",
+"ownerTextbox": "xpath:://input[@id='owner']",
+"genearlInfoTab": "xpath:://lava-icn[@label='General Info']",
+"titleIDCheck": "xpath:(//div[@class='ag-cell-wrapper']//span)[2]"
+
+}

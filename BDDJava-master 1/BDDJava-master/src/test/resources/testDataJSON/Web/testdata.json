@@ -1,0 +1,19 @@
+{
+	"MinAndMaxLength":{
+    "referenceNumber_MinLength":"5",
+    "referenceNumber_MaxLength":"20",
+    "DeclaredValue_MinLength":"100000",
+    "DeclaredValue_MaxLength":"400000"
+    },
+    
+    "Descriptions":[
+        "Conveyancing property on land adjacent to Glover Square -- Lease , Transfer of ownership",
+        "Conveyance of Brads house -- Mortgage Registration",
+        "Subdivision of 45 Weldon Rd --- Subdivision Service",
+        "Transfer and mortage registration for Mrs Stower -- Transfer and Mortgage",
+        "Discharge of restriction -- Cancel RRR",
+        "New property registration --- First Registration"
+    ]
+    
+    
+}

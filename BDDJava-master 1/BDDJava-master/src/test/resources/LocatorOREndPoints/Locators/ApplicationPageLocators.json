@@ -1,0 +1,28 @@
+{
+"applicationTab": "xpath:://lava-nav-item[@id='nav-applications']",
+"newApplicationButton": "xpath:://span[text()='New Application']",
+"fileReferenceTextBox": "xpath::(//input[contains(@class,'mat-mdc-input-element ng-untouched')])[1]",
+"descriptionTextBox": "xpath:://textarea[@rows='1' and @aria-describedby='mat-mdc-hint-0']",
+"applicantsListBox": "xpath:://mat-select[@aria-haspopup='listbox' and @role='combobox']",
+"applicantsFilterTextBox" : "xpath:://input[@id='select' and @aria-label='Filter']",
+"applicantValue": "xpath::(//mat-option[@role='option'])[1]",
+"receiptDataField": "xpath:://mat-label[text()='Receipt Date']",
+"receiptDataCalendarIcon": "xpath::(//span[@class='mat-mdc-focus-indicator'])[1]",
+"sprintValidationTextBox": "xpath::(//input[@type='text'])[2]",
+"addressTextBoxClick": "xpath:://input[@placeholder=\"Address of the client\"]",
+"addressTextBox": "xpath::(//div[contains(@class,'mat-mdc-text-field-wrapper mdc-text-field ng-tns-c3736059725-15 mdc-text-field--outlined')])",
+"myDateCalendarField": "xpath::(//input[@data-mat-calendar='mat-datepicker-0'])[2]",
+"myPhoneField": "xpath::(//input[@autocomplete='new-password'])[4]",
+"myOtherNumberField": "xpath::(//input[@autocomplete='new-password'])[5]",
+"myOtherTextField": "xpath::(//input[@type='text'])[4]",
+"applicationCreatebutton": "xpath:://lava-btn[@id='btn-create']",
+"applicationID" : "xpath::(//aside[@aria-label='Log Message']//p)[1]",
+"titlesAndParcelsTab": "xpath:://aside[@id='tab-titles-and-parcels']",
+"partiesTab": "xpath:://aside[@id='tab-parties']",
+"servicesTab": "xpath:://aside[@id='tab-services']",
+"date": "xpath:://span[normalize-space(text())='19']",
+"applicationSearchFilter": "xpath:://input[@id='applications-filter']",
+"applicationEditButton": "xpath:://lava-btn[@icon='edit']",
+"descriptionTextBoxValue": "xpath:://textarea[@maxlength='4000']"
+
+}

@@ -1,0 +1,14 @@
+{
+  "loginPageTitle": "xpath:://h1[text()='Login']",
+  "tenantDropdownField": "xpath:://div[@id='mat-select-value-1']//span[1]",
+//  "tenantSelectionDropdownBox":"xpath:://div[@class='material-select-compo-section ng-tns-c32-3']",
+  "tenantSelectionTestCan": "id::mat-option-1",
+  "agentUsernameTextbox": "xpath:://input[@id='workbench-username']",
+  "agentPasswordTextbox": "xpath:://input[@id='workbench-password']",
+  "submitButton": "xpath:://lava-btn[@id='btn-examiner-login']",
+  "homePage": "xpath:://a[normalize-space(text())='Work Queue']",
+  "logginTerminationPopup": "xpath:://lava-prompt-info[@class='mat-mdc-dialog-component-host']",
+  "sessionTerminatePopup": "xpath:://span[normalize-space(text())='Yes']",
+  "tenantValueText": "xpath:://span[text()='Test CAN Selenium']",
+  "logginTerminationPopup2": "xpath:://p[text()='You are already logged in, should existing session be terminated?']"
+}

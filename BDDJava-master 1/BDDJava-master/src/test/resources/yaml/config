@@ -1,0 +1,50 @@
+TestDetails:
+  Screenshot_switch: true
+  
+  #Execution Instance[PrePRODUCTION1, PrePRODUCTION2, PrePRODUCTION4, QA, SIT, PRODUCTION]
+  Execution Instance: PRODUCTION
+  
+  #Environment[For send mail]
+  Environment: Production
+  
+  #Browser -IE/Chrome/Edge/Firefox
+  Browser: chrome
+  
+  #Mobile - Android/iOS/AndroidChrome/iOSSafari
+  
+  Users: Agent
+  
+  #ApplicationType[Web,API,Mobile]
+  ApplicationType: Web
+  
+  #Email Notifiers:
+  SentMail: No
+  ToRecipients: ['santhiya.p@zucisystems.com']
+  CCRecipients: ['santhiya.p@zucisystems.com', 'santhiya.p@zucisystems.com']
+   
+QA:
+  host: 
+  
+PrePRODUCTION1:
+  host: 
+  
+PrePRODUCTION2:
+  host: 
+  
+PrePRODUCTION4:
+  host: 
+  OTP: 2142
+  mobileNo: 2123456789
+  
+PRODUCTION:
+
+  host: http://agent.test.lava.landadmin.com/#/auth/login
+  host2: http://workbench.test.lava.landadmin.com/#/auth/login
+  
+Agent:
+   Agent_username : Jessica
+   Agent_password : Shree@123
+
+Examiner:
+   Examiner_username : Jessica
+   Examiner_password : Shree@123

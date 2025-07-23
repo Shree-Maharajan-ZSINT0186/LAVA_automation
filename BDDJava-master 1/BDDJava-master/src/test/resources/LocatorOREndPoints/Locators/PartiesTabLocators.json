@@ -1,0 +1,10 @@
+{
+"partiesTab": "xpath:://aside[@id='tab-parties']",
+"partiesSearchIcon": "xpath:://lava-btn[@id='icon-search-parties']",
+"selectPartiesSearchIcon":"xpath:://lava-btn-search[@id='btn-application-search' and contains(@class, 'lava-btn-primary') and contains(@class, 'lava-btn-3xl')]",
+"partiesNameTextbox":"xpath::(//input[contains(@class,'mat-mdc-input-element ng-untouched')])[1]",
+"partiesTitleIdBox": "xpath::(//label[contains(.,'Title ID')]/following::input)[1]",
+"addPartiesButton": "xpath:://lava-btn[@id='btn-add-parties']",
+"partyIdTextBox": "xpath:://label[@for='partyId']",
+"partyAddressTextBox": "xpath:://label[@for='addressText']"
+}
