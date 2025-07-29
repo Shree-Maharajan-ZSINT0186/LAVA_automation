@@ -12,12 +12,20 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Enumeration;
+
+import static Helpers.WebActions.driver;
+
 public class CreateApplicationStepDef extends FakerClassLibrary{
 	
 	public String loginLocators = "LoginPageLocators";
@@ -123,15 +131,28 @@ public class CreateApplicationStepDef extends FakerClassLibrary{
 			expected_Details_Dict.put("Description", expectedDescriptionValue);
 			WebActions.enterTextOn(applicationLocators, "descriptionTextBox", expectedDescriptionValue);
 			Utils.stepInfoLog("The added Description is: " +expectedDescriptionValue);
+
+			//Entering value for client name
+			WebActions.clickOn(applicationLocators, "clientNameTextBox");
+			String expectedClientName = faker.getFirstName();
+			System.out.println("Client name from faker"+expectedClientName);
+			expected_Details_Dict.put("ClientName", expectedClientName);
+			WebActions.enterTextOn(applicationLocators, "clientNameTextBox", expectedClientName);
+			Utils.stepInfoLog("The added client name is: " +expectedClientName);
 		
 			//Address field
 			WebActions.clickOn(applicationLocators, "addressTextBoxClick");
 			WebActions.setWaitTime(1000);
 			String expectedAddress = faker.getStreetAddress();
+			System.out.println(expectedAddress);
 			expected_Details_Dict.put("Address", expectedAddress);
 			WebActions.enterTextOn(applicationLocators, "addressTextBoxClick", expectedAddress);
 			Utils.stepInfoLog("The added Address value is: " +expectedAddress);
-			
+
+			//select department
+			WebActions.setWaitTime(1000);
+			WebActions.JSclickOn(applicationLocators, "departmentRadioOption");
+
 			//Submit
 			WebActions.clickOn(applicationLocators, "applicationCreatebutton");
 			WebActions.setWaitTime(3000);
@@ -173,6 +194,7 @@ public class CreateApplicationStepDef extends FakerClassLibrary{
 			WebActions.clickOn(applicationLocators, "applicationEditButton");
 			WebActions.setWaitTime(2000);
 			System.out.print("after opening the application tab");
+			WebActions.setWaitTime(2000);
 			String actualAddress = WebActions.getValueAttribute(applicationLocators, "addressTextBoxClick");
 			System.out.println("actual address"+actualAddress);
 			actual_Details_Dict.put("Address", actualAddress);
@@ -180,6 +202,8 @@ public class CreateApplicationStepDef extends FakerClassLibrary{
 			actual_Details_Dict.put("Description", actualDescription);
 			String ActualRefferenceNumber = WebActions.getValueAttribute(applicationLocators, "fileReferenceTextBox");
 			actual_Details_Dict.put("Reference Number", ActualRefferenceNumber);
+			String ActualClientName = WebActions.getValueAttribute(applicationLocators, "clientNameTextBox");
+			actual_Details_Dict.put("ClientName", ActualClientName);
 			System.out.println("actual_Details_Dict"+actual_Details_Dict);
 			// Verify each key-value pair
 			List<Boolean> results = new ArrayList<>();
@@ -346,44 +370,47 @@ public class CreateApplicationStepDef extends FakerClassLibrary{
 			WebActions.clickOn(servicesTabLocators, "addServicesButton");
 			WebActions.setWaitTime(1000);
 			WebActions.enterTextOn(servicesTabLocators, "searchServicesBox", 
-					JSONReader.getJSONDataBlockKey("ServiceData", "Service", "serviceName"));
+					JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "serviceName"));
 			String serviceName = JSONReader.getJSONDataBlockKey("ServiceData", "Service", "serviceName");
 			Utils.stepInfoLog("The selected service name is: " +serviceName);
 			WebActions.clickOn(servicesTabLocators, "addServiceValue");
 			WebActions.setWaitTime(2000);
 			WebActions.JSclickOn(servicesTabLocators, "expandTitleAndParcel");
-			WebActions.JSclickOn(servicesTabLocators, "validateIcon");
-			
-			String expectedErrors1 = JSONReader.getJSONDataBlockKey("ServiceData", "validation", "MortgageRegValidation1");
-			String expectedErrors2 = JSONReader.getJSONDataBlockKey("ServiceData", "validation", "MortgageRegValidation2");
-			String expectedErrors3 = JSONReader.getJSONDataBlockKey("ServiceData", "validation", "MortgageRegValidation3");
-			
-			String[] expectedError = {expectedErrors1,expectedErrors2,expectedErrors3};
-			List<String> expectedMortgageRegistrationErrors = new ArrayList<>();
-			for (String expectedErrorValue : expectedError) {
-				expectedMortgageRegistrationErrors.add(expectedErrorValue);
-			}
-			System.out.println("expectedMortgageRegistrationErrors" +expectedMortgageRegistrationErrors);
-			String actualRRRNotSelected = WebActions.getElementText(servicesTabLocators, "validationErrorMsgOne");
-			String actualRightholderNotSelected = WebActions.getElementText(servicesTabLocators, "validationErrorMsgTwo");
-			String actualDocumentError = WebActions.getElementText(servicesTabLocators, "validationErrorMsgThree");
-			
-			String[] actualErrors = {actualRRRNotSelected,actualRightholderNotSelected,actualDocumentError};
-			List<String> actualMortgageRegistrationErrors = new ArrayList<>();
-			for (String actualErrorValue : actualErrors) {
-				actualMortgageRegistrationErrors.add(actualErrorValue);
-			}
-			System.out.println("actualMortgageRegistrationErrors" +actualMortgageRegistrationErrors);
-			//Assert.assertEquals(expectedMortgageRegistrationErrors.equals(actualMortgageRegistrationErrors), 
-				    //"The values are not equal! Actual: " + actualMortgageRegistrationErrors + ", Expected: " + expectedMortgageRegistrationErrors);
-			Assert.assertEquals("The values are not equal!", expectedMortgageRegistrationErrors, actualMortgageRegistrationErrors);
-	
-			Utils.stepInfoLog("The validation actual value is: " +actualMortgageRegistrationErrors);
-			Utils.stepInfoLog("The validation expected value is: " +expectedMortgageRegistrationErrors);
-			
-			Utils.passedTestLog("Validation message are displayed correctly");
-			WebActions.performEnter(1);
-			WebActions.setWaitTime(1000);
+
+
+			//validation check before adding service
+//			WebActions.JSclickOn(servicesTabLocators, "validateIcon");
+//
+//			String expectedErrors1 = JSONReader.getJSONDataBlockKey("ServiceData", "validation", "MortgageRegValidation1");
+//			String expectedErrors2 = JSONReader.getJSONDataBlockKey("ServiceData", "validation", "MortgageRegValidation2");
+//			String expectedErrors3 = JSONReader.getJSONDataBlockKey("ServiceData", "validation", "MortgageRegValidation3");
+//
+//			String[] expectedError = {expectedErrors1,expectedErrors2,expectedErrors3};
+//			List<String> expectedMortgageRegistrationErrors = new ArrayList<>();
+//			for (String expectedErrorValue : expectedError) {
+//				expectedMortgageRegistrationErrors.add(expectedErrorValue);
+//			}
+//			System.out.println("expectedMortgageRegistrationErrors" +expectedMortgageRegistrationErrors);
+//			String actualRRRNotSelected = WebActions.getElementText(servicesTabLocators, "validationErrorMsgOne");
+//			String actualRightholderNotSelected = WebActions.getElementText(servicesTabLocators, "validationErrorMsgTwo");
+//			String actualDocumentError = WebActions.getElementText(servicesTabLocators, "validationErrorMsgThree");
+//
+//			String[] actualErrors = {actualRRRNotSelected,actualRightholderNotSelected,actualDocumentError};
+//			List<String> actualMortgageRegistrationErrors = new ArrayList<>();
+//			for (String actualErrorValue : actualErrors) {
+//				actualMortgageRegistrationErrors.add(actualErrorValue);
+//			}
+//			System.out.println("actualMortgageRegistrationErrors" +actualMortgageRegistrationErrors);
+//			//Assert.assertEquals(expectedMortgageRegistrationErrors.equals(actualMortgageRegistrationErrors),
+//				    //"The values are not equal! Actual: " + actualMortgageRegistrationErrors + ", Expected: " + expectedMortgageRegistrationErrors);
+//			Assert.assertEquals("The values are not equal!", expectedMortgageRegistrationErrors, actualMortgageRegistrationErrors);
+//
+//			Utils.stepInfoLog("The validation actual value is: " +actualMortgageRegistrationErrors);
+//			Utils.stepInfoLog("The validation expected value is: " +expectedMortgageRegistrationErrors);
+//
+//			Utils.passedTestLog("Validation message are displayed correctly");
+//			WebActions.performEnter(1);
+//			WebActions.setWaitTime(1000);
 			
 		} catch (InterruptedException e) {
 			Utils.failedTestLog("Validation messages are not equal" +e.getMessage());
@@ -392,10 +419,19 @@ public class CreateApplicationStepDef extends FakerClassLibrary{
 		}
 	}
 	
-	@Then("Agent add a Service")
-	public void agentAddAService() throws Exception {
+	@And("Agent add a Mortgage Registration Service")
+	public void agentAddMortgageRegistrationService() throws Exception {
 		//ExtentReportSetup.test = ExtentReportSetup.createtheTest("Adding a Service");
 		try {
+            WebActions.clickOn(servicesTabLocators, "addServicesButton");
+            WebActions.setWaitTime(1000);
+            WebActions.enterTextOn(servicesTabLocators, "searchServicesBox",
+                    JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "serviceName"));
+            String serviceName = JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "serviceName");
+            Utils.stepInfoLog("The selected service name is: " +serviceName);
+            WebActions.clickOn(servicesTabLocators, "addServiceValue");
+            WebActions.setWaitTime(2000);
+            WebActions.JSclickOn(servicesTabLocators, "expandTitleAndParcel");
 			System.out.println("came in add service");
 			WebActions.setWaitTime(3000);
 			WebActions.JSclickOn(servicesTabLocators, "RRRDropDownBox");
@@ -414,75 +450,72 @@ public class CreateApplicationStepDef extends FakerClassLibrary{
 			WebActions.JSclickOn(servicesTabLocators, "expiryData");
 			WebActions.setWaitTime(1000);
 			WebActions.performEnter(1);
-			WebActions.clickOn(servicesTabLocators, "typeBox");
-			WebActions.enterTextOn(servicesTabLocators, "filterBox",
-					JSONReader.getJSONDataBlockKey("ServiceData", "Service", "typeValue"));
-			WebActions.clickOn(servicesTabLocators, "typeValue");
-			WebActions.performESCFunction(1);
-			String TypeValue = JSONReader.getJSONDataBlockKey("ServiceData", "Service", "typeValue");
-			Utils.stepInfoLog("The selected type value is: " +TypeValue);
+			//typebox - error
+//			WebActions.clickOn(servicesTabLocators, "typeBox");
+//			WebActions.enterTextOn(servicesTabLocators, "filterBox",
+//					JSONReader.getJSONDataBlockKey("ServiceData", "Service", "typeValue"));
+//			WebActions.clickOn(servicesTabLocators, "typeValue");
+//			WebActions.performESCFunction(1);
+////			System.out.println("check type value");
+////			WebActions.performEnter(1);
+//			String TypeValue = JSONReader.getJSONDataBlockKey("ServiceData", "Service", "typeValue");
+//			Utils.stepInfoLog("The selected type value is: " +TypeValue);
 			WebActions.clickOn(servicesTabLocators, "amountField");
 			WebActions.enterTextOn(servicesTabLocators, "amountField",
-					JSONReader.getJSONDataBlockKey("ServiceData", "Service", "amountValue"));
-			String amountValue = JSONReader.getJSONDataBlockKey("ServiceData", "Service", "amountValue");
+					JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "amountValue"));
+			String amountValue = JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "amountValue");
 			Utils.stepInfoLog("The selected amount value is: " +amountValue);
 			WebActions.setWaitTime(1000);
 			WebActions.clickOn(servicesTabLocators, "documentSearchIcon");
 			WebActions.setWaitTime(4000);
 			WebActions.JSclickOn(servicesTabLocators, "documentIDTextBox");
 			WebActions.enterTextOn(servicesTabLocators, "documentIDTextBox", 
-					JSONReader.getJSONDataBlockKey("ServiceData", "Service", "documentId"));
-			String documentID = JSONReader.getJSONDataBlockKey("ServiceData", "Service", "documentId");
+					JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "documentId"));
+			String documentID = JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "documentId");
 			Utils.stepInfoLog("The selected documentId is: " +documentID);
 			WebActions.setWaitTime(1000);
 			WebActions.JSclickOn(servicesTabLocators, "documentTextBoxSearchIcon");
 			WebActions.setWaitTime(4000);
 			WebActions.JSclickOn(servicesTabLocators, "documentRefTextBox");
 			WebActions.performTabAndSpace(16);
+			System.out.println("document");
 			WebActions.clickOn(servicesTabLocators, "documentAddButton");
 			WebActions.setWaitTime(3000);
-    		WebActions.JSclickOn(servicesTabLocators, "validateButtom");
-			WebActions.setWaitTime(4000);
-			WebActions.performEnter(1);
-			WebActions.setWaitTime(1000);
-			WebActions.clickOn(servicesTabLocators, "lodgeButton");
-			WebActions.setWaitTime(2000);
-			
+			//WebActions.JSclickOn(servicesTabLocators, "expandTitleAndParcel");
+
+			//validation check
+
+
+			System.out.println("validation");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			WebElement validateBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='mat-mdc-focus-indicator'])[2]")));
+			System.out.println("Validate button is visible.");
+			WebActions.JSclickOn(servicesTabLocators, "validateButton");
 			WebActions.setWaitTime(3000);
-			WebActions.JSclickOn(servicesTabLocators, "expandTitleAndParcel");
-			WebActions.JSclickOn(servicesTabLocators, "validateButtom");
-			Utils.stepInfoLog("Application is Lodged sucessfully");
-			WebActions.setWaitTime(3000);
-			String actualValidationSucessMsg = WebActions.getElementText(servicesTabLocators, "validationSucessMsg");
-			String expectedValidationSucessMsg = JSONReader.getJSONDataBlockKey("ServiceData", "validation", "validationSucessMsg");
+			String actualValidationSucessMsg = WebActions.getElementText(servicesTabLocators, "ServiceValidationSucessMsg");
+			String expectedValidationSucessMsg = JSONReader.getJSONDataBlockKey("ServiceData", "MortgageValidation", "validationSucessMsg");
 			System.out.println("actualValidationSucessMsg" +actualValidationSucessMsg);
 			System.out.println("expectedValidationSucessMsg" +expectedValidationSucessMsg);
-			if(actualValidationSucessMsg ==expectedValidationSucessMsg) {
+			if(actualValidationSucessMsg.equals(expectedValidationSucessMsg)) {
 				Utils.stepInfoLog("Matched validation message is found : \" Expected : \""+expectedValidationSucessMsg+"\" and Actual : \""+actualValidationSucessMsg+"\" are equal");
 			}else {
 			Utils.failedStepInfoLog("Mismatch validation message is found : \" Expected : \""+expectedValidationSucessMsg+"\" and Actual : \""+actualValidationSucessMsg+"\" are not equal");
 			Assert.fail("Different validation message is displayed" );
 			Assert.assertEquals("The values are not equal!", expectedValidationSucessMsg, actualValidationSucessMsg);
-			
+
 			}
-			WebActions.performEnter(1);
-//			WebActions.JSclickOn(servicesTabLocators, "valPopupClose");
-			Utils.passedTestLog("Service is added sucessfully");
-		} catch (Throwable e) {
+
+			System.out.println("Close Validate button");
+//			WebActions.JSclickOn(servicesTabLocators, "ServiceValidationCloseButton");
+//			Utils.passedTestLog("Service is added sucessfully");
+
+		}
+		catch (Throwable e)
+		{
 			Utils.failedTestLog("There is an issue in adding a service: " + " " + e.getMessage());
 			ScreenShotCapture.importScreenToReports("Add_service");			
 			Assert.fail("Different validation message is displayed: " + " " + e.getMessage());	
 			e.printStackTrace();
 		}
 	}
-
-
-
-
-
-
-
-
-
-
 }

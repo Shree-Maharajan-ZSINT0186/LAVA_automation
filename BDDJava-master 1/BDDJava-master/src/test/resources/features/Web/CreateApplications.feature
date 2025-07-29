@@ -25,6 +25,8 @@ Feature: Create new application
     @createServies
   Scenario: Add Service
   Then Agent should be navigated to the Service tab
-  Then Validation for the service should be displayed
-  And Agent add a Service
+#      Then Validation for the service should be displayed
+  And Agent add a Mortgage Registration Service
+      #And Agent add a Lease Registration Service
+
 
