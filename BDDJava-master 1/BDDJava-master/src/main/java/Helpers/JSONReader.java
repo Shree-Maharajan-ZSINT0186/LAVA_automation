@@ -105,8 +105,8 @@ public class JSONReader {
 			Object obj = jsonParser.parse(reader);
 			GlobalData.jsonObj = (JSONObject) obj;
 			elementPath = GlobalData.jsonObj.get(elementName).toString();
-			type = elementPath.split("::")[0];
-			value = elementPath.split("::")[1];
+			type = elementPath.split("~~")[0];
+			value = elementPath.split("~~")[1];
 			switch (type.toLowerCase()) {
 			case "id":
 				return By.id(value);
