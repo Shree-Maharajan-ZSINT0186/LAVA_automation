@@ -1138,14 +1138,6 @@ public class WebActions {
 	}
 
 
-	public static void performTab(int tabCount) {
-		Actions actions = new Actions(driver);
-
-		for (int i = 0; i < tabCount; i++) {
-			actions.sendKeys(Keys.TAB).perform();
-		}
-	}
-
 	public static void JSclickOn(String fileName, String ele) throws Throwable {
 		try {
 			setOfLocators = JSONReader.getLocatorsFromJSONFile(fileName, ele);
@@ -1181,6 +1173,13 @@ public class WebActions {
 		// Press Esc key
 		for (int i = 0; i < enterCount; i++) {
 			actions.sendKeys(Keys.ENTER).perform();
+		}
+	}
+	public static void performTab(int tabCount) {
+		Actions actions = new Actions(driver);
+
+		for (int i = 0; i < tabCount; i++) {
+			actions.sendKeys(Keys.TAB).perform();
 		}
 	}
 
