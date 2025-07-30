@@ -4,11 +4,11 @@ Feature: Create new application
   @launch
   Scenario: Create new application
   
-    Given Launch the application
-    And Navigate to the Application tab
-    And Agent create a new application
-    Then Application Id should be created
-    Then The added application details should be saved sucessfully
+      Given Launch the application
+      And Navigate to the Application tab
+      And Agent create a new application
+      Then Application Id should be created
+      Then The added application details should be saved sucessfully
 
   @createTitleAndParcles
   Scenario: Add Titles and Parcels
@@ -22,11 +22,14 @@ Feature: Create new application
     When Agent click on the Parties search Icon
     And Agent add a Party
 
-    @createServies
+  @createServies
   Scenario: Add Service
   Then Agent should be navigated to the Service tab
-#      Then Validation for the service should be displayed
-  And Agent add a Mortgage Registration Service
-      #And Agent add a Lease Registration Service
+      And Agent add a Mortgage Registration Service
+      And Agent add a Lease Registration Service
+      And Agent add a Transfer of Ownership Service
 
+  @lodgeApplication
+  Scenario: Validate and lodge the application
+    And Agent Validates and Lodge the application
 

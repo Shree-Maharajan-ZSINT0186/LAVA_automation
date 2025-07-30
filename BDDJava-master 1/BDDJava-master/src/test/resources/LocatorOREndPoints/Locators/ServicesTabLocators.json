@@ -19,8 +19,7 @@
   "ServiceValidationSucessMsg": "xpath~~//span[text()=' Service is valid ']",
   "ServiceValidationCloseButton": "xpath~~//span[@id='modal-close-icon' and @class=\"la la-close \"]",
   "validateIcon": "xpath~~//span[normalize-space(text())='Validate']",
-"validateButtom": "xpath~~//span[text()='Validate']",
-"lodgeButton": "xpath~~//span[text()='Lodge']",
+
 "extendedValidation" : "xpath~~//h1[text()='Extended Validation']",
 "severity": "xpath~~(//span[@ref='eText'])[20]",
 "override": "xpath~~//span[text()='Override']",
@@ -38,7 +37,34 @@
 "amountField": "xpath~~//input[@style='text-align: right;']",
 "effectiveDate": "xpath~~(//input[@aria-haspopup='dialog'])[1]",
 "expiryData": "xpath~~(//input[@aria-haspopup='dialog'])[2]",
-"valPopupClose": "xpath~~//span[@id='modal-close-icon' and @class='la la-close ']"
+"valPopupClose": "xpath~~//span[@id='modal-close-icon' and @class='la la-close ']",
 
+  "LeaseExpandTitleAndParcel": "xpath~~//mat-panel-title[contains(.,'2 Lease Registration')]",
+  "LeaseRRRValueSelect": "xpath~~//span[text()=\"Lease (10 year)\"]",
+  "LeaseRRRDropDownBox": "xpath~~(//mat-label[text()='RRR'])[2]",
+  "LeaseRightHolders": "xpath~~(//mat-select[@role='combobox'])[7]",
+  "LeaseRightHoldersValue": "xpath~~//span[text()=\"His Majesty the King \"]",
+  "LeaseEffectiveDate": "xpath~~(//input[@aria-haspopup='dialog'])[3]",
+  "LeaseExpiryDate": "xpath~~(//input[@aria-haspopup='dialog'])[4]",
+  "LeaseAmountField": "xpath~~(//input[@style='text-align: right;'])[2]",
+  "LeaseAddCondition": "xpath~~//button[@aria-label='Add condition']",
+  "LeaseAddConditionName": "xpath~~//input[@type='text' and contains(@class, 'mat-mdc-input-element')]",
+  "LeaseAddConditionDescription": "xpath~~//textarea[@rows='1']",
+  "LeaseAddConditionSave": "xpath~~//button[.//span[text()='Save']]",
+  "LeaseDocumentSearchIcon": "xpath~~(//lava-btn[@id='input-search-doc'])[2]",
+  "LeaseValidateButton": "xpath~~(//span[@class='mat-mdc-focus-indicator'])[14]",
 
+  "TransferOfOwnershipExpandTitleAndParcel": "xpath~~//mat-panel-title[contains(.,'3 Transfer of Ownership')]",
+  "TransferOfOwnershipRRRValueSelect": "xpath~~//span[text()=\"Freehold\"]",
+  "TransferOfOwnershipRRRDropDownBox": "xpath~~(//mat-label[text()='RRR'])[3]",
+  "TransferOfOwnershipDeclaredValue": "xpath~~(//input[@style='text-align: right;'])[3]",
+  "TransferOfOwnershipDocumentSearchIcon": "xpath~~(//lava-btn[@id='input-search-doc'])[3]",
+  "TransferOfOwnershipRightHolders": "xpath~~(//mat-select[@role='combobox'])[11]",
+  "TransferOfOwnershipRightHoldersValue": "xpath~~//span[text()='Dofasco ']",
+  "TransferOfOwnershipValidateButton": "xpath~~(//span[@class='mat-mdc-focus-indicator'])[30]",
+
+  "validateButtom": "xpath~~//span[text()='Validate']",
+  "ApplicationValidationSucessMsg": "xpath~~//span[text()='Application information is valid']",
+  "lodgeButton": "xpath~~//span[text()='Lodge']",
+  "ApplicationStatus": "xpath~~//a[contains(@class,'btn-states lodged')]"
 }
