@@ -1,4 +1,4 @@
 {
-"profileIcon": "xpath:://span[@id='agent-profile-image']",
-"logoutButton" : "xpath:://span[normalize-space(text())='Log out']"
+"profileIcon": "xpath~~//span[@id='agent-profile-image']",
+"logoutButton" : "xpath~~//span[normalize-space(text())='Log out']"
 }

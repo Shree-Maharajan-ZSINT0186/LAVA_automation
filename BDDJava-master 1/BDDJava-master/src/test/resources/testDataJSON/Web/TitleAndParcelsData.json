@@ -2,5 +2,8 @@
 "Title": {
 "titleID": "TID0151",
 "applicantValue": "Dofasco"
-}
+},
+  "Parcel": {
+    "parcelID": "PID0102"
+  }
 }

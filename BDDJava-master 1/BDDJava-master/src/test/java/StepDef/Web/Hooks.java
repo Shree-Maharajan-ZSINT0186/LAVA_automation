@@ -130,7 +130,7 @@ public class Hooks {
 		ExtentReportSetup.extentSummary.flush();
 	}
 	
-	//@AfterAll
+//	@AfterAll
 	public void afterScenarioApplicationLogout() throws Exception {
 		try {
 			WebActions.setWaitTime(5000);

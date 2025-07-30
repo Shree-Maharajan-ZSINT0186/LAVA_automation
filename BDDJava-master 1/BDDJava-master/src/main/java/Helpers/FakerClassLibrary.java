@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class FakerClassLibrary{
 
     Faker faker = new Faker();
+    static String userDirectory = System.getProperty("user.dir");
 
     public String getReferenceNumber(int length)
     {
@@ -78,7 +79,7 @@ public class FakerClassLibrary{
     
     public String getDescription()
     {
-        JSONObject jo = (JSONObject) JsonFileParser.getJsonFileObject("D:\\LAVA_automation\\BDDJava-master 1\\BDDJava-master\\src\\test\\resources\\testDataJSON\\Web\\testdata.json");
+        JSONObject jo = (JSONObject) JsonFileParser.getJsonFileObject(userDirectory+"\\src\\test\\resources\\testDataJSON\\Web\\testdata.json");
         // Extract JSON array
         JSONArray jsonArray = (JSONArray) jo.get("Descriptions");
  

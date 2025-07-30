@@ -437,6 +437,7 @@ public class WebActions {
 			setOfLocators = JSONReader.getLocatorsFromJSONFile(fileName, ele);
 			waitForElementToVisible(fileName,ele);
 			text = driver.findElement(setOfLocators).getText();
+			System.out.print("text"+text);
 		}catch (Exception e) {
 			Utils.failedTestLog("Getting text for this locator "+ele+"("+setOfLocators+")"+" is failed");
 			ScreenShotCapture.importScreenToReports("GetTextFail");
@@ -1127,6 +1128,14 @@ public class WebActions {
 
 		// Press Space key
 		actions.sendKeys(" ").perform();
+	}
+
+	public static void performTab(int tabCount) {
+		Actions actions = new Actions(driver);
+
+		for (int i = 0; i < tabCount; i++) {
+			actions.sendKeys(Keys.TAB).perform();
+		}
 	}
 
 	public static void JSclickOn(String fileName, String ele) throws Throwable {
