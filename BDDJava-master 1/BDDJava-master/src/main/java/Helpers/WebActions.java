@@ -1129,6 +1129,15 @@ public class WebActions {
 		actions.sendKeys(" ").perform();
 	}
 
+	public static void performRightArrow(int arrowCount) {
+		Actions actions = new Actions(driver);
+
+		for (int i = 0; i < arrowCount; i++) {
+			actions.sendKeys(Keys.ARROW_RIGHT).perform();
+		}
+	}
+
+
 	public static void JSclickOn(String fileName, String ele) throws Throwable {
 		try {
 			setOfLocators = JSONReader.getLocatorsFromJSONFile(fileName, ele);

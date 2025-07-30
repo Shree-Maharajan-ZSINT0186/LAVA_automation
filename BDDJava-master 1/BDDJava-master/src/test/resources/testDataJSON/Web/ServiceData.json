@@ -2,37 +2,40 @@
 	"MortgageService": {
 		"serviceName": "Mortgage Registration",
 		"documentId": "DOC0484",
-		"confirmPass": "Password@123",
+
 		"typeValue": "Accelerated",
 		"amountValue": "900000"
 	},
 	"MortgageValidation": {
+		"MortgageRegValidation1": "RRR not selected",
+		"MortgageRegValidation2": "Rightholder(s) not selected",
+		"MortgageRegValidation3": "The number of documents do not satisfy the requirements",
 		"validationSucessMsg": "Service is valid"
 	},
 	"LeaseService": {
 		"serviceName": "Lease Registration",
 		"documentId": "DOC0104",
 		"confirmPass": "Password@123",
-		"typeValue": "Accelerated",
-		"amountValue": "900000"
+		"amountValue": "900000",
+		"conditionName": "Court Order",
+		"conditionDescription": "Court order should not be there"
 	},
 	"LeaseValidation": {
-		"MortgageRegValidation1": "RRR not selected",
-		"MortgageRegValidation2": "Rightholder(s) not selected",
-		"MortgageRegValidation3": "The number of documents do not satisfy the requirements",
 		"validationSucessMsg": "Service is valid"
 	},
 	"TransferOfOwnershipService": {
-	"serviceName": "Mortgage Registration",
-	"documentId": "DOC0484",
+	"serviceName": "Transfer Of Ownership",
+	"documentId": "DOC0146",
 	"confirmPass": "Password@123",
-	"typeValue": "Accelerated",
 	"amountValue": "900000"
 	},
 	"TransferOfOwnershipValidation": {
-		"MortgageRegValidation1": "RRR not selected",
-		"MortgageRegValidation2": "Rightholder(s) not selected",
-		"MortgageRegValidation3": "The number of documents do not satisfy the requirements",
 		"validationSucessMsg": "Service is valid"
+	},
+	"LodgeApplication": {
+		"applicationValidationSucessMsg": "Application information is valid",
+		"confirmPass": "Password@123",
+		"status": "Lodged"
 	}
+
 }
