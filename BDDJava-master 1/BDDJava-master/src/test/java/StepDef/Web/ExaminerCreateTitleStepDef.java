@@ -205,8 +205,8 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             WebActions.setWaitTime(1000);
             WebActions.JSclickOn(ExaminerCreateTitleLocators, "documentIDTextBox");
             WebActions.enterTextOn(ExaminerCreateTitleLocators, "documentIDTextBox",
-                    JSONReader.getJSONDataBlockKey("ServiceData", "Service", "documentId"));
-            String documentID = JSONReader.getJSONDataBlockKey("ServiceData", "Service", "documentId");
+                    JSONReader.getJSONDataBlockKey("createTitle", "document", "documentId"));
+            String documentID = JSONReader.getJSONDataBlockKey("createTitle", "document", "documentId");
             Utils.stepInfoLog("The selected documentId is: " +documentID);
             WebActions.setWaitTime(1000);
             WebActions.JSclickOn(ExaminerCreateTitleLocators, "documentTextBoxSearchIcon");
