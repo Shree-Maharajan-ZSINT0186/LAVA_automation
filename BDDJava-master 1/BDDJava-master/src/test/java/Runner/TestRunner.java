@@ -75,7 +75,7 @@ public class TestRunner {
 		}
 	}
 	
-	@AfterClass 
+	@AfterClass
 	public static void embedReport() throws Throwable {
 		try {
 			int failedSceSize = 0;
@@ -98,11 +98,21 @@ public class TestRunner {
 			WebActions.clickOn(AccountPageLocators,"logoutButton");
 			Utils.passedTestLog("The Agent successfully LoggedOff the application");
 			WebActions.setWaitTime(2000);
-			WebActions.driver.manage().deleteAllCookies(); WebActions.driver.quit();
+			if(WebActions.driver != null) {
+				WebActions.driver.manage().deleteAllCookies();
+				WebActions.driver.quit();
+				WebActions.driver = null;
+			}
+//			WebActions.driver.manage().deleteAllCookies(); WebActions.driver.quit();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			WebActions.driver.manage().deleteAllCookies(); WebActions.driver.quit();
+//			WebActions.driver.manage().deleteAllCookies(); WebActions.driver.quit();
+			if(WebActions.driver != null) {
+				WebActions.driver.manage().deleteAllCookies();
+				WebActions.driver.quit();
+				WebActions.driver = null;
+			}
 		}
 		 
 	}

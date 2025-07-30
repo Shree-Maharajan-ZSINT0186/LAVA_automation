@@ -1,11 +1,23 @@
 @application
 Feature: Create new title
 
-  @launch
-  Scenario: Create new title
-
+  Scenario: Launch the application
     Given Launch workbench the application
-#    And Navigate to the standalone title tab and clicks add icon
+
+  @createTitle
+  Scenario Outline: Create new title after launch
+    When Navigate to the standalone title tab
+    And Add party details of new title
+    And Add parcel details of new title
+    And Get the newTitleID
+    Then enter the new title details
+
+    Examples:
+      | iteration |
+      | 1         |
+      | 2         |
+      | 3         |
+
 
 
 #  @createTitleAndParcles
