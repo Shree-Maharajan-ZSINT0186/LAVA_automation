@@ -1,14 +1,8 @@
 package StepDef.Web;
 
+import Helpers.*;
 import org.junit.Assert;
 
-import Helpers.ExtentReportSetup;
-import Helpers.FakerClassLibrary;
-import Helpers.JSONReader;
-import Helpers.ScreenShotCapture;
-import Helpers.Utils;
-import Helpers.WebActions;
-import Helpers.YamlLoader;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -172,6 +166,7 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
         try {
             boolean applicationIDValidation = WebActions.isElementDisplayed(applicationLocators, "applicationID");
             String applicationID = WebActions.getElementText(applicationLocators, "applicationID");
+            Store.addApplicationId(applicationID);
             System.out.println("appId:" + applicationID);
             if (applicationIDValidation) {
                 Assert.assertTrue("Application ID is displayed successfully." + applicationID, applicationIDValidation);

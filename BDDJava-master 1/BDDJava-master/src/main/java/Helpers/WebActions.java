@@ -260,6 +260,34 @@ public class WebActions {
 
 		}
 	}
+	public static void checkBoxClick(String fileName, String ele) throws Throwable {
+		try {
+			setOfLocators = JSONReader.getLocatorsFromJSONFile(fileName, ele);
+			waitForElementToVisible(fileName, ele);
+
+			WebElement checkbox = driver.findElement(setOfLocators);
+			Actions actions = new Actions(driver);
+
+			if (checkbox.isDisplayed()) {
+				// Option 1: Try regular click first
+				// checkbox.click();
+				System.out.print("checkbox is displayed");
+				// Option 2: Use Actions click
+				actions.moveToElement(checkbox).click().perform();
+
+				// Option 3: Fallback to JavaScript click if needed
+				// ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
+			}
+
+		} catch (Exception e) {
+			System.out.print("ckeck box is not clicked");
+			Utils.failedTestLog(ele + " (" + setOfLocators + ") is not clickable at this moment");
+			ScreenShotCapture.importScreenToReports("clickonFailed");
+			e.printStackTrace();
+			// Assert.fail(e.getMessage());
+		}
+	}
+
 
 	/**
 	 * Method Description: This method is used to find the locator element
@@ -1150,6 +1178,7 @@ public class WebActions {
 			JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 			jsExecutor.executeScript("arguments[0].click();", element);
 		} catch (Exception e) {
+			System.out.print("js click failed");
 			Utils.failedTestLog(ele + "(" + setOfLocators + ") is not clickable at this moment");
 			ScreenShotCapture.importScreenToReports("clickonFailed");
 			e.printStackTrace();

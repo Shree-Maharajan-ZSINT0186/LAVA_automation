@@ -1,0 +1,11 @@
+{
+  "workqueueTab": "xpath~~//a[normalize-space(text())='Work Queue']",
+  "applicationIDTextbox": "xpath~~//input[@type='text' and @placeholder='Application ID' and contains(@class, 'mat-mdc-input-element')]",
+  "refreshIcon": "xpath~~(//button[@aria-label='Refresh'])[2]",
+  "clearMyselfExaminerDropdown": "xpath~~//mat-chip-row[.//span[contains(text(), 'Myself')]]//span[@id='modal-close-icon' and contains(@class, 'la-clear')]",
+  "applicationCheckBox": "xpath~~//div[@col-id='checkboxSelectionColumn' and contains(@class, 'ag-cell')]//div[contains(@class, 'ag-selection-checkbox')]",
+  "assignMySelfButton": "xpath~~//span[contains(normalize-space(text()), 'Assign Myself')]",
+  "ConfirmAssignYesButton": "xpath~~//span[contains(normalize-space(text()), 'Yes')]",
+  "missingCompetencyAssignButton": "xpath~~//span[@class='button-text' and text()='Assign']",
+  "processIcon": "xpath~~//lava-btn[@id='btn-workqueue-Process']//button[@aria-label='Process']"
+}
