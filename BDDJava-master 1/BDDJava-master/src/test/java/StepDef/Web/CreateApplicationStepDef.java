@@ -524,6 +524,7 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.clickOn(servicesTabLocators, "addServiceValue");
             WebActions.setWaitTime(2000);
             WebActions.performESCFunction(1);
+            WebActions.setWaitTime(2000);
             WebActions.JSclickOn(servicesTabLocators, "LeaseExpandTitleAndParcel");
             System.out.println("came in add service");
             WebActions.setWaitTime(3000);
