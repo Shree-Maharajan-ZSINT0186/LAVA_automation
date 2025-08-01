@@ -3,7 +3,7 @@ package Helpers;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TitleIdStore {
+public class Store {
     public static List<String> titleIdList = new ArrayList<>();
 
     public static void addTitleId(String id) {

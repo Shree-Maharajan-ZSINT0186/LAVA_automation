@@ -1,5 +1,6 @@
 package StepDef.Web;
 
+import Helpers.Store;
 import org.junit.Assert;
 
 import Helpers.ExtentReportSetup;
@@ -20,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
@@ -257,45 +259,76 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
         }
     }
 
-    @And("Agent click on the Title search Icon")
-    public void agentClickOnTheTitleSearchIcon() throws Exception {
-        //ExtentReportSetup.test = ExtentReportSetup.createtheTest("Add title pop-up");
-        try {
-            WebActions.clickOn(titlesAndParcelsTabLocators, "titlesSearchIcon");
-            Utils.passedTestLog("Add title pop-up is displayed");
-        } catch (Throwable e) {
-            Utils.failedTestLog("There is a issues in clicking the search icon so add title pop-up is not displayed" + e.getMessage());
-            ScreenShotCapture.importScreenToReports("Add_title_popup");
-            e.printStackTrace();
-        }
-
-    }
-
-    @When("Agent add a Title")
+    @And("Agent add Titles")
     public void agentAddATitle() throws Exception {
         //ExtentReportSetup.test = ExtentReportSetup.createtheTest("Adding details to the Title tab");
-        try {
-            WebActions.clickOn(titlesAndParcelsTabLocators, "addTitlesSearchIcon");
-            WebActions.setWaitTime(7000);
-            WebActions.enterTextOn(titlesAndParcelsTabLocators, "titleIdTextBox",
-                    JSONReader.getJSONDataBlockKey("TitleAndParcelsData", "Title", "titleID"));
-            WebActions.setWaitTime(1000);
-            String titleID = JSONReader.getJSONDataBlockKey("TitleAndParcelsData", "Title", "titleID");
-            String actualTitleID = WebActions.getValueAttribute(titlesAndParcelsTabLocators, "titleIdTextBox");
-            System.out.println("titleid:" + titleID);
-            System.out.println("Acttitleid:" + actualTitleID);
-            Utils.stepInfoLog("The selected Title is: " + titleID);
-            Utils.stepInfoLog("The Actual Title entered is: " + actualTitleID);
-            WebActions.clickOn(titlesAndParcelsTabLocators, "addTitlesSearchIcon");
-            WebActions.setWaitTime(6000);
-            WebActions.clickOn(titlesAndParcelsTabLocators, "ownerTextbox");
-            WebActions.performTabAndSpace(14);
-            WebActions.clickOn(titlesAndParcelsTabLocators, "titleAddButton");
-            //WebActions.waitForElementToVisible(titlesAndParcelsTabLocators, "titleIDCheck");
-            //String actualTitleID = WebActions.getValueAttribute(titlesAndParcelsTabLocators, "titleIDCheck");
-            Assert.assertEquals("The values are not equal!", titleID, actualTitleID);
+//        try {
+//            WebActions.clickOn(titlesAndParcelsTabLocators, "addTitlesSearchIcon");
+//            WebActions.setWaitTime(7000);
+//            WebActions.enterTextOn(titlesAndParcelsTabLocators, "titleIdTextBox",
+//                    JSONReader.getJSONDataBlockKey("TitleAndParcelsData", "Title", "titleID"));
+//            WebActions.setWaitTime(1000);
+//            String titleID = JSONReader.getJSONDataBlockKey("TitleAndParcelsData", "Title", "titleID");
+//            String actualTitleID = WebActions.getValueAttribute(titlesAndParcelsTabLocators, "titleIdTextBox");
+//            System.out.println("titleid:" + titleID);
+//            System.out.println("Acttitleid:" + actualTitleID);
+//            Utils.stepInfoLog("The selected Title is: " + titleID);
+//            Utils.stepInfoLog("The Actual Title entered is: " + actualTitleID);
+//            WebActions.clickOn(titlesAndParcelsTabLocators, "addTitlesSearchIcon");
+//            WebActions.setWaitTime(6000);
+//            WebActions.clickOn(titlesAndParcelsTabLocators, "ownerTextbox");
+//            WebActions.performTabAndSpace(14);
+//            WebActions.clickOn(titlesAndParcelsTabLocators, "titleAddButton");
+//            //WebActions.waitForElementToVisible(titlesAndParcelsTabLocators, "titleIDCheck");
+//            //String actualTitleID = WebActions.getValueAttribute(titlesAndParcelsTabLocators, "titleIDCheck");
+//            Assert.assertEquals("The values are not equal!", titleID, actualTitleID);
+//
+//            Utils.passedTestLog("Title is added sucessfully");
+//
+//        } catch (Throwable e) {
+//            Utils.failedTestLog("There is a issues in adding title" + e.getMessage());
+//            ScreenShotCapture.importScreenToReports("Add_Title");
+//            e.printStackTrace();
+//        }
 
-            Utils.passedTestLog("Title is added sucessfully");
+        try {
+//            List<String> titlesList = Arrays.asList("TID9783","TID9784","TID9785");
+
+            for(int i=1;i<3;i++) {
+                WebActions.setWaitTime(10000);
+                WebActions.clickOn(titlesAndParcelsTabLocators, "titlesSearchIcon");
+                WebActions.setWaitTime(3000);
+                String titleID = Store.getTitleIds().get(i);
+//                String titleID=titlesList.get(i);
+                if(i>0)
+                {
+                    WebActions.clearText(titlesAndParcelsTabLocators, "titleIdTextBox");
+                }
+                WebActions.enterTextOn(titlesAndParcelsTabLocators, "titleIdTextBox", titleID);
+                WebActions.setWaitTime(1000);
+                String actualTitleID = WebActions.getValueAttribute(titlesAndParcelsTabLocators, "titleIdTextBox");
+                System.out.println("TitleId:" + titleID);
+                System.out.println("ActualTitleId:" + actualTitleID);
+                Utils.stepInfoLog("The selected Title is: " + titleID);
+                Utils.stepInfoLog("The Actual Title entered is: " + actualTitleID);
+                System.out.println("add-titles-search");
+                WebActions.clickOn(titlesAndParcelsTabLocators, "addTitlesSearchIcon");
+                WebActions.setWaitTime(6000);
+                WebActions.clickOn(titlesAndParcelsTabLocators, "ownerTextbox");
+                WebActions.performTabAndSpace(14);
+                try {
+                    WebActions.waitForElementToVisible(titlesAndParcelsTabLocators, "titleAddButton");
+                    System.out.println("Element is visible.");
+                } catch (Exception e) {
+                    System.out.println("Element is NOT visible.");
+                }
+                //WebActions.waitForElementToVisible(titlesAndParcelsTabLocators, "titleAddButton");
+                System.out.println("title-add-button");
+                WebActions.JSclickOn(titlesAndParcelsTabLocators, "titleAddButton");
+                Assert.assertEquals("The values are not equal!", titleID, actualTitleID);
+
+                Utils.passedTestLog("Title is added sucessfully");
+            }
 
         } catch (Throwable e) {
             Utils.failedTestLog("There is a issues in adding title" + e.getMessage());
@@ -369,62 +402,6 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
         }
     }
 
-    @Then("Validation for the service should be displayed")
-    public void serviceValidation() throws Throwable {
-
-        try {
-            WebActions.clickOn(servicesTabLocators, "addServicesButton");
-            WebActions.setWaitTime(1000);
-            WebActions.enterTextOn(servicesTabLocators, "searchServicesBox",
-                    JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "serviceName"));
-            String serviceName = JSONReader.getJSONDataBlockKey("ServiceData", "Service", "serviceName");
-            Utils.stepInfoLog("The selected service name is: " + serviceName);
-            WebActions.clickOn(servicesTabLocators, "addServiceValue");
-            WebActions.setWaitTime(2000);
-            WebActions.JSclickOn(servicesTabLocators, "expandTitleAndParcel");
-
-
-            //validation check before adding service
-//			WebActions.JSclickOn(servicesTabLocators, "validateIcon");
-//
-//			String expectedErrors1 = JSONReader.getJSONDataBlockKey("ServiceData", "validation", "MortgageRegValidation1");
-//			String expectedErrors2 = JSONReader.getJSONDataBlockKey("ServiceData", "validation", "MortgageRegValidation2");
-//			String expectedErrors3 = JSONReader.getJSONDataBlockKey("ServiceData", "validation", "MortgageRegValidation3");
-//
-//			String[] expectedError = {expectedErrors1,expectedErrors2,expectedErrors3};
-//			List<String> expectedMortgageRegistrationErrors = new ArrayList<>();
-//			for (String expectedErrorValue : expectedError) {
-//				expectedMortgageRegistrationErrors.add(expectedErrorValue);
-//			}
-//			System.out.println("expectedMortgageRegistrationErrors" +expectedMortgageRegistrationErrors);
-//			String actualRRRNotSelected = WebActions.getElementText(servicesTabLocators, "validationErrorMsgOne");
-//			String actualRightholderNotSelected = WebActions.getElementText(servicesTabLocators, "validationErrorMsgTwo");
-//			String actualDocumentError = WebActions.getElementText(servicesTabLocators, "validationErrorMsgThree");
-//
-//			String[] actualErrors = {actualRRRNotSelected,actualRightholderNotSelected,actualDocumentError};
-//			List<String> actualMortgageRegistrationErrors = new ArrayList<>();
-//			for (String actualErrorValue : actualErrors) {
-//				actualMortgageRegistrationErrors.add(actualErrorValue);
-//			}
-//			System.out.println("actualMortgageRegistrationErrors" +actualMortgageRegistrationErrors);
-//			//Assert.assertEquals(expectedMortgageRegistrationErrors.equals(actualMortgageRegistrationErrors),
-//				    //"The values are not equal! Actual: " + actualMortgageRegistrationErrors + ", Expected: " + expectedMortgageRegistrationErrors);
-//			Assert.assertEquals("The values are not equal!", expectedMortgageRegistrationErrors, actualMortgageRegistrationErrors);
-//
-//			Utils.stepInfoLog("The validation actual value is: " +actualMortgageRegistrationErrors);
-//			Utils.stepInfoLog("The validation expected value is: " +expectedMortgageRegistrationErrors);
-//
-//			Utils.passedTestLog("Validation message are displayed correctly");
-//			WebActions.performEnter(1);
-//			WebActions.setWaitTime(1000);
-
-        } catch (InterruptedException e) {
-            Utils.failedTestLog("Validation messages are not equal" + e.getMessage());
-            ScreenShotCapture.importScreenToReports("Validation_1");
-            e.printStackTrace();
-        }
-    }
-
     @And("Agent add a Mortgage Registration Service")
     public void agentAddMortgageRegistrationService() throws Exception {
         //ExtentReportSetup.test = ExtentReportSetup.createtheTest("Adding a Service");
@@ -438,14 +415,21 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.clickOn(servicesTabLocators, "addServiceValue");
             WebActions.setWaitTime(2000);
             WebActions.performESCFunction(1);
+            WebActions.setWaitTime(2000);
             WebActions.JSclickOn(servicesTabLocators, "expandTitleAndParcel");
             System.out.println("came in add service");
             WebActions.setWaitTime(3000);
+            WebActions.clickOn(servicesTabLocators, "mortgageTitle");
+            WebActions.clickOn(servicesTabLocators, "mortgageChooseTitle");
+            WebActions.setWaitTime(1000);
+            WebActions.performTab(1);
             WebActions.JSclickOn(servicesTabLocators, "RRRDropDownBox");
             WebActions.setWaitTime(1000);
             WebActions.JSclickOn(servicesTabLocators, "RRRValueSelect");
             WebActions.clickOn(servicesTabLocators, "rightHolders");
-            WebActions.clickOn(servicesTabLocators, "rightHoldersValue");
+//            WebActions.clickOn(servicesTabLocators, "rightHoldersValue");
+            WebActions.performEnter(1);
+            WebActions.performTab(1);
             WebActions.setWaitTime(1000);
             WebActions.performTabAndSpace(1);
             //WebActions.performESCFunction(1);
@@ -541,11 +525,22 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.JSclickOn(servicesTabLocators, "LeaseExpandTitleAndParcel");
             System.out.println("came in add service");
             WebActions.setWaitTime(3000);
+            //WebActions.performTab(1);
+//            WebActions.JSclickOn(servicesTabLocators, "LeaseTitle");
+//            WebActions.performDownArrow(1);
+//            WebActions.performEnter(1);
+//            WebActions.performTab(1);
+            WebActions.clickOn(servicesTabLocators, "LeaseTitle");
+            WebActions.clickOn(servicesTabLocators, "LeaseChooseTitle");
+            WebActions.performTab(1);
+            WebActions.setWaitTime(3000);
             WebActions.JSclickOn(servicesTabLocators, "LeaseRRRDropDownBox");
             WebActions.setWaitTime(1000);
             WebActions.JSclickOn(servicesTabLocators, "LeaseRRRValueSelect");
             WebActions.clickOn(servicesTabLocators, "LeaseRightHolders");
-            WebActions.clickOn(servicesTabLocators, "LeaseRightHoldersValue");
+            WebActions.performEnter(1);
+            WebActions.performTab(1);
+            //WebActions.clickOn(servicesTabLocators, "LeaseRightHoldersValue");
             WebActions.setWaitTime(1000);
             WebActions.performTabAndSpace(1);
             //WebActions.performESCFunction(1);
@@ -656,6 +651,15 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.JSclickOn(servicesTabLocators, "TransferOfOwnershipExpandTitleAndParcel");
             System.out.println("came in add service");
             WebActions.setWaitTime(3000);
+//            //WebActions.performTab(1);
+//            WebActions.JSclickOn(servicesTabLocators, "TransferOfOwnershipTitle");
+//            WebActions.performDownArrow(2);
+//            WebActions.performEnter(1);
+//            WebActions.performTab(1);
+            WebActions.clickOn(servicesTabLocators, "TransferOfOwnershipTitle");
+            WebActions.clickOn(servicesTabLocators, "TransferOfOwnershipChooseTitle");
+            WebActions.performTab(1);
+            WebActions.setWaitTime(3000);
             WebActions.JSclickOn(servicesTabLocators, "TransferOfOwnershipRRRDropDownBox");
             WebActions.setWaitTime(1000);
             WebActions.JSclickOn(servicesTabLocators, "TransferOfOwnershipRRRValueSelect");
@@ -669,7 +673,7 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.clickOn(servicesTabLocators, "TransferOfOwnershipRightHolders");
             WebActions.performEnter(1);
             WebActions.setWaitTime(1000);
-            //perform tab
+            WebActions.performTab(1);
             //document
             WebActions.clickOn(servicesTabLocators, "TransferOfOwnershipDocumentSearchIcon");
             WebActions.setWaitTime(4000);

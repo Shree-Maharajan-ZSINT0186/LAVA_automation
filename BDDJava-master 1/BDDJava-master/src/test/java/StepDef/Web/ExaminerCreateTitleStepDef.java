@@ -4,14 +4,10 @@ import org.junit.Assert;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
-import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.List;
-import java.util.Enumeration;
+
 public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
 
     public String ExaminerLoginLocators = "ExaminerLoginPageLocators";
@@ -169,7 +165,7 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             WebActions.setWaitTime(1500);
             String titleID= WebActions.getValueAttribute(ExaminerCreateTitleLocators,"newTitleID");
             System.out.println("Captured Title ID: " + titleID);
-            TitleIdStore.addTitleId(titleID);
+            Store.addTitleId(titleID);
         } catch(Throwable e){
             Utils.failedTestLog("There is an issue while getting titleID");
             ScreenShotCapture.importScreenToReports("Application_details");
@@ -187,12 +183,18 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             WebActions.clickOn(ExaminerCreateTitleLocators,"selectLegalFramework");
             System.out.print("legal framework selected");
 
-            //relationship
-//            WebActions.setWaitTime(1500);
-//            WebActions.clickOn(ExaminerCreateTitleLocators,"BAUHeading");
-//            WebActions.waitForElementToVisible(ExaminerCreateTitleLocators,"relationship");
-//            WebActions.clickOn(ExaminerCreateTitleLocators,"relationship");
-//            WebActions.clickOn(ExaminerCreateTitleLocators,"relationshipRoot");
+//            BAU relationship
+            WebActions.setWaitTime(1500);
+            WebActions.clickOn(ExaminerCreateTitleLocators,"BAUHeading");
+
+            WebActions.clickOn(ExaminerCreateTitleLocators,"titleId");
+            WebActions.clickOn(ExaminerCreateTitleLocators,"titleOption");
+            WebActions.performTab(1);
+
+
+            WebActions.waitForElementToVisible(ExaminerCreateTitleLocators,"relationship");
+            WebActions.clickOn(ExaminerCreateTitleLocators,"relationship");
+            WebActions.clickOn(ExaminerCreateTitleLocators,"relationshipRoot");
 
             //description
             String expectedDescriptionValue = faker.getDescription();
@@ -263,7 +265,7 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
 //            WebActions.waitForElementToVisible(ExaminerCreateTitleLocators,"closeValidationButton");
 //            WebActions.clickOn(ExaminerCreateTitleLocators,"closeValidationButton");
 
-            System.out.print("titles created"+TitleIdStore.getTitleIds());
+            System.out.print("titles created"+ Store.getTitleIds());
             WebActions.setWaitTime(1500);
             WebActions.clickOn(ExaminerCreateTitleLocators,"ApproveButton");
             WebActions.setWaitTime(1500);

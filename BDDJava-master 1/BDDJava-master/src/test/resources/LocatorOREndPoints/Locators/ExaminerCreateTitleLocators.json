@@ -42,5 +42,7 @@
   "SearchTab": "xpath~~//a[.//em[contains(@class, 'la-search')] and contains(text(), 'Search')]",
   "partiesClearButton": "xpath~~(//button[@aria-label='Clear' and .//span[contains(@class, 'la la-clear')]])[2]",
   "parcelClearButton": "xpath~~(//button[@aria-label='Clear' and .//span[contains(@class, 'la la-clear')]])[2]",
-  "documentClearButton": "xpath~~(//button[@aria-label='Clear' and .//span[contains(@class, 'la la-clear')]])[2]"
+  "documentClearButton": "xpath~~(//button[@aria-label='Clear' and .//span[contains(@class, 'la la-clear')]])[2]",
+  "titleId": "xpath~~(//mat-label[text()='Title ID'])[3]",
+  "titleOption": "xpath~~(//mat-option[contains(@class, 'mat-mdc-option')])[1]"
 }

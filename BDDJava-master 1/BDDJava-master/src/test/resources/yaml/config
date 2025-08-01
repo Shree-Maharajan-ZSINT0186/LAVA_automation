@@ -42,9 +42,9 @@ PRODUCTION:
   Examiner_host: http://workbench.test.lava.landadmin.com/#/auth/login
   
 Agent:
-   Agent_username : Jessica
-   Agent_password : U2hyZWVAMTIz
+   Agent_username : Angela
+   Agent_password : QW5nZWxhQDIz
 
 Examiner:
-   Examiner_username : Carolyn
-   Examiner_password : U2hyZWVAMTIz
+   Examiner_username : Maria
+   Examiner_password : TWFyaWFAMjM=

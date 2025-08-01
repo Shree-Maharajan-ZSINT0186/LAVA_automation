@@ -1136,6 +1136,14 @@ public class WebActions {
 			actions.sendKeys(Keys.ARROW_RIGHT).perform();
 		}
 	}
+	public static void performDownArrow(int arrowCount) {
+		Actions actions = new Actions(driver);
+
+		for (int i = 0; i < arrowCount; i++) {
+			actions.sendKeys(Keys.ARROW_DOWN).perform();
+		}
+	}
+
 
 
 	public static void JSclickOn(String fileName, String ele) throws Throwable {
