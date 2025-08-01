@@ -4,10 +4,14 @@ import org.junit.Assert;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
-
+import java.util.List;
+import java.util.Enumeration;
 public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
 
     public String ExaminerLoginLocators = "ExaminerLoginPageLocators";
@@ -68,6 +72,14 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             } else {
                 Assert.fail("work queue title is NOT displayed");
             }
+            int incompletePopUp = WebActions.getElementSize(ExaminerCreateTitleLocators, "incompletePopUp");
+            System.out.println("val:" +incompletePopUp);
+            if(incompletePopUp == 1) {
+                WebActions.setWaitTime(1000);
+                WebActions.JSclickOn(ExaminerCreateTitleLocators, "incompletePopupNoButton");
+            }else {
+                System.out.println("No incomplete works proceed with title creation");
+            }
             Utils.passedTestLog("Examiner is logged in to the workbench application sucessfully");
         } catch (Exception e) {
             Utils.failedTestLog("There is an issue in logging");
@@ -80,6 +92,7 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
     public void navigateToTheStandAloneTitleTab() throws Exception {
         //ExtentReportSetup.test = ExtentReportSetup.createtheTest("Navigation to Application Tab");
         try {
+            WebActions.setWaitTime(1000);
             WebActions.clickOn(ExaminerCreateTitleLocators,"SearchTab");
             WebActions.setWaitTime(1000);
             WebActions.clickOn(ExaminerCreateTitleLocators, "titleTab");
@@ -265,7 +278,7 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
 //            WebActions.waitForElementToVisible(ExaminerCreateTitleLocators,"closeValidationButton");
 //            WebActions.clickOn(ExaminerCreateTitleLocators,"closeValidationButton");
 
-            System.out.print("titles created"+ Store.getTitleIds());
+            System.out.print("titles created"+Store.getTitleIds());
             WebActions.setWaitTime(1500);
             WebActions.clickOn(ExaminerCreateTitleLocators,"ApproveButton");
             WebActions.setWaitTime(1500);
@@ -274,4 +287,18 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
 
         }
     }
+
+    @And("I create new titles for {int} iterations")
+    public void createMultipleTitles(int iterations)throws Exception {
+        for (int i = 1; i <= iterations; i++) {
+            System.out.println("Creating title iteration " + i);
+            navigateToTheStandAloneTitleTab();
+            addPartyDetailsOfNewTitle();
+            addParcelDetailsOfNewTitle();
+            getNewTitleID();
+            enterNewTitleDetails();
+        }
+    }
+
 }
+

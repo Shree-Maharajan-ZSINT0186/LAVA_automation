@@ -19,6 +19,8 @@
   "newTitleLegalFrameworkDropdown": "xpath~~(//mat-label[text()='Legal Framework'])[2]",
   "selectLegalFramework": "xpath~~(//mat-option[contains(@class, 'mat-mdc-option')])[2]",
   "relationship": "xpath~~//mat-label[text()='Relationship']",
+  "titleId": "xpath~~(//mat-label[text()='Title ID'])[3]",
+  "titleOption": "xpath~~(//mat-option[contains(@class, 'mat-mdc-option')])[1]",
   "BAUHeading": "xpath~~//aside[@aria-label='Label Of BAU Relationship']",
   "relationshipRoot": "xpath~~//mat-option[contains(@class, 'mat-mdc-option')]//span[contains(., 'Root')]",
   "description": "xpath~~(//textarea[@matinput and @cdktextareaautosize and @lavatrimwhitespace])[1]",
@@ -43,6 +45,6 @@
   "partiesClearButton": "xpath~~(//button[@aria-label='Clear' and .//span[contains(@class, 'la la-clear')]])[2]",
   "parcelClearButton": "xpath~~(//button[@aria-label='Clear' and .//span[contains(@class, 'la la-clear')]])[2]",
   "documentClearButton": "xpath~~(//button[@aria-label='Clear' and .//span[contains(@class, 'la la-clear')]])[2]",
-  "titleId": "xpath~~(//mat-label[text()='Title ID'])[3]",
-  "titleOption": "xpath~~(//mat-option[contains(@class, 'mat-mdc-option')])[1]"
+  "incompletePopUp": "xpath~~//p[normalize-space(text())='Incomplete edits have been detected, restore?']",
+  "incompletePopupNoButton": "xpath~~//span[normalize-space(text())='No']"
 }

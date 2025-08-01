@@ -40,7 +40,7 @@ import io.cucumber.junit.Cucumber;
 		dryRun = false,
 		snippets = SnippetType.CAMELCASE,
 		//tags= "@15mins or @Hourly or @Daily or @3Days or @1Week",
-		tags= "@application",
+		tags= "@createTitleFeature or @application or @assignToMyself",
 		plugin = {"pretty",
 				"json:target/cucumber-reports/json-report.json", // JSON report
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

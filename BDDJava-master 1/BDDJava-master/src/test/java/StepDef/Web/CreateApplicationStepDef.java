@@ -1,5 +1,6 @@
 package StepDef.Web;
 
+import Helpers.*;
 import Helpers.Store;
 import org.junit.Assert;
 
@@ -174,6 +175,7 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
         try {
             boolean applicationIDValidation = WebActions.isElementDisplayed(applicationLocators, "applicationID");
             String applicationID = WebActions.getElementText(applicationLocators, "applicationID");
+            Store.addApplicationId(applicationID);
             System.out.println("appId:" + applicationID);
             if (applicationIDValidation) {
                 Assert.assertTrue("Application ID is displayed successfully." + applicationID, applicationIDValidation);
