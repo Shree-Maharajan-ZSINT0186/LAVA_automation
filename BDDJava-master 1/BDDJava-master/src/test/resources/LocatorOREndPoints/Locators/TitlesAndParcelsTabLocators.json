@@ -4,7 +4,7 @@
 "addTitlesSearchIcon": "id~~btn-application-search",
 "titleIdTextBox": "xpath~~//input[@id='titleId']",
 "titleIDCheckbox": "xpath~~//input[@aria-label='Press Space to toggle row selection (unchecked)']",
-"titleAddButton": "xpath~~//lava-btn[@id='btn-add-Titles']",
+"titleAddButton": "xpath~~//lava-btn[@id='btn-add-Titles']//button[1]",
 "parcelsSearchIcon":" xpath~~//lava-btn[@id='icon-search-parcels']",
 "addParcelsSearchIcon": "xpath~~//lava-btn-search[@class='lava-btn-primary lava-btn-3xl']",
 "parcelIdTextBox": "xpath~~//input[@id='parcelId']",

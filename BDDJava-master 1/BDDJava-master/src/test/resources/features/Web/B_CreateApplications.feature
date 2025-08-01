@@ -13,8 +13,8 @@ Feature: Create new application
   @createTitleAndParcles
   Scenario: Add Titles and Parcels
   When Agent should be navigated to the Title tab
-    And Agent click on the Title search Icon
-    And Agent add a Title
+#    And Agent click on the Title search Icon
+    And Agent add Titles
 
   @createParties
   Scenario: Add Parties
