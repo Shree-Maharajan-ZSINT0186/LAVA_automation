@@ -73,8 +73,8 @@ public class AssignApplicationToExaminerStepDef {
 
             Utils.passedTestLog("Examiner is logged in to the workbench application sucessfully");
         } catch (Exception e) {
-            Utils.failedTestLog("There is an issue in logging");
-            ScreenShotCapture.importScreenToReports("examiner Login");
+            Utils.failedTestLog("There is an issue in logging in examiner application");
+            ScreenShotCapture.importScreenToReports("examiner_Login");
             e.printStackTrace();
             //Assert.fail("Dashboard page title is NOT displayed");
         }
@@ -92,6 +92,7 @@ public class AssignApplicationToExaminerStepDef {
             // enter application id
             String applicationId=Store.getApplicationId();
 //            String applicationId="APP0212";
+            Utils.stepInfoLog("application ID:"+applicationId);
             WebActions.enterTextOn(AssignApplicationToExaminer, "applicationIDTextbox",applicationId);
             WebActions.clickOn(AssignApplicationToExaminer,"clearMyselfExaminerDropdown");
             WebActions.JSclickOn(AssignApplicationToExaminer,"refreshIcon");
@@ -113,10 +114,10 @@ public class AssignApplicationToExaminerStepDef {
 
             //click process icon
              WebActions.clickOn(AssignApplicationToExaminer,"processIcon");
-
+            Utils.passedTestLog("The application was successfully assigned to myself");
 
         } catch (Throwable e) {
-            Utils.failedTestLog("There is an issue while Examiner searched for required application");
+            Utils.failedTestLog("There is an issue while Examiner assigning the application");
             ScreenShotCapture.importScreenToReports("seacrh application by examiner to assign to myself");
             e.printStackTrace();
         }

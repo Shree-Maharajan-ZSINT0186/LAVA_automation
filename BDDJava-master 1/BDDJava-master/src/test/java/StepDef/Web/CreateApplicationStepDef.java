@@ -296,7 +296,7 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
         try {
 //            List<String> titlesList = Arrays.asList("TID9783","TID9784","TID9785");
 
-            for(int i=1;i<3;i++) {
+            for(int i=0;i<4;i++) {
                 WebActions.setWaitTime(10000);
                 WebActions.clickOn(titlesAndParcelsTabLocators, "titlesSearchIcon");
                 WebActions.setWaitTime(3000);

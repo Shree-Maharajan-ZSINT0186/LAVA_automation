@@ -199,10 +199,14 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
 //            BAU relationship
             WebActions.setWaitTime(1500);
             WebActions.clickOn(ExaminerCreateTitleLocators,"BAUHeading");
+            int parentTitle=WebActions.getElementSize(ExaminerCreateTitleLocators,"titleId");
+            if(parentTitle==1){
+                WebActions.clickOn(ExaminerCreateTitleLocators,"titleId");
+                WebActions.clickOn(ExaminerCreateTitleLocators,"titleOption");
+                WebActions.performTab(1);
+            }
 
-            WebActions.clickOn(ExaminerCreateTitleLocators,"titleId");
-            WebActions.clickOn(ExaminerCreateTitleLocators,"titleOption");
-            WebActions.performTab(1);
+
 
 
             WebActions.waitForElementToVisible(ExaminerCreateTitleLocators,"relationship");
@@ -222,7 +226,6 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             WebActions.enterTextOn(ExaminerCreateTitleLocators, "documentIDTextBox",
                     JSONReader.getJSONDataBlockKey("createTitle", "document", "documentId"));
             String documentID = JSONReader.getJSONDataBlockKey("createTitle", "document", "documentId");
-            Utils.stepInfoLog("The selected documentId is: " +documentID);
             WebActions.setWaitTime(1000);
             WebActions.JSclickOn(ExaminerCreateTitleLocators, "documentTextBoxSearchIcon");
             WebActions.setWaitTime(4000);
@@ -280,10 +283,18 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
 
             System.out.print("titles created"+Store.getTitleIds());
             WebActions.setWaitTime(1500);
+            WebActions.waitForElementToVisible(ExaminerCreateTitleLocators,"ApproveButton");
+            WebActions.isElementClickable(ExaminerCreateTitleLocators,"ApproveButton");
             WebActions.clickOn(ExaminerCreateTitleLocators,"ApproveButton");
             WebActions.setWaitTime(1500);
+            WebActions.waitForElementToVisible(ExaminerCreateTitleLocators,"approveYesButton");
+            WebActions.isElementClickable(ExaminerCreateTitleLocators,"approveYesButton");
             WebActions.clickOn(ExaminerCreateTitleLocators,"approveYesButton");
+            WebActions.setWaitTime(6000);
         }catch(Throwable e){
+            System.out.println("issue while approving title"+e.getMessage());
+            Utils.failedTestLog("There is an issue while getting titleID");
+            ScreenShotCapture.importScreenToReports("Application_details");
 
         }
     }
