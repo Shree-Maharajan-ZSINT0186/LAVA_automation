@@ -327,7 +327,7 @@ public class WebActions {
 				driver.findElement(setOfLocators).sendKeys(value);
 			}
 		}catch (Exception e) {
-			Utils.failedTestLog("can't able to enter text for this element "+ele+"("+setOfLocators+")");
+			Utils.failedTestLog("can't able to enter text for the element "+ele+"("+setOfLocators+")");
 			ScreenShotCapture.importScreenToReports("enterTexton_fail");
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
@@ -391,7 +391,7 @@ public class WebActions {
 				driver.findElement(setOfLocators).sendKeys(value);
 			}
 		}catch (Exception e) {
-			Utils.failedTestLog("can't able to enter text for this element "+ele+"("+setOfLocators+")");
+			Utils.failedTestLog("can't able to enter text for the element "+ele+"("+setOfLocators+")");
 			ScreenShotCapture.importScreenToReports("enterTexton_fail");
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
@@ -433,7 +433,7 @@ public class WebActions {
 					throw new AssertionError("Wrong action provided");
 			}
 		}catch (Exception e) {
-			Utils.failedTestLog("Not selected any value for this locator "+ele+"("+setOfLocators+")");
+			Utils.failedTestLog("Not selected any value for the locator "+ele+"("+setOfLocators+")");
 			ScreenShotCapture.importScreenToReports("SelectValueFail");
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
@@ -691,6 +691,7 @@ public class WebActions {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(setOfLocators));
 		} catch (Exception e) {
 			Utils.failedTestLog(ele+"("+setOfLocators+")"+" is not visible at this moment");
+//			Utils.failedTestLog(ele+ " is not visible at this moment");
 			ScreenShotCapture.importScreenToReports("waitFail");
 			e.printStackTrace();
 			//Assert.fail(e.getMessage());
@@ -1219,6 +1220,10 @@ public class WebActions {
 			actions.sendKeys(Keys.TAB).perform();
 		}
 	}
+	public static String getCurrentDateTime() {
+		return java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+	}
+
 
 	public static boolean validateStrings(String s1, String s2, String key) {
 		boolean value = false;

@@ -7,5 +7,22 @@
   "assignMySelfButton": "xpath~~//span[contains(normalize-space(text()), 'Assign Myself')]",
   "ConfirmAssignYesButton": "xpath~~//span[contains(normalize-space(text()), 'Yes')]",
   "missingCompetencyAssignButton": "xpath~~//span[@class='button-text' and text()='Assign']",
-  "processIcon": "xpath~~//lava-btn[@id='btn-workqueue-Process']//button[@aria-label='Process']"
+  "processIcon": "xpath~~//lava-btn[@id='btn-workqueue-Process']//button[@aria-label='Process']",
+  "windowsIcon": "xpath~~ //a[normalize-space(text())='Windows' and contains(@class, 'dropdown-toggle')]",
+  "resetLayout": "xpath~~ //button[@role='menuitem' and .//span[normalize-space(text())='Reset Layout']]\n",
+  "mortgageProcessIcon": "xpath~~(//button[@aria-label='Process'])[1]",
+  "LeaseProcessIcon": "xpath~~(//button[@aria-label='Process'])[1]",
+  "transferOfOwnershipProcessIcon": "xpath~~(//button[@aria-label='Process'])[1]",
+  "transferOfOwnershipRevertIcon":"xpath~~(//button[@aria-label='Revert'])[3]",
+  "handlePopup": "xpath~~//span[normalize-space(text())='Yes']",
+  "totalValidateIcon": "xpath~~//lava-btn[@id='btn-validate-application']//button[1]",
+  "totalCompleteIcon": "xpath~~//lava-btn[@id='btn-complete-application']//button[1]",
+  "totalCompletedView": "xpath~~(//lava-icn[@hint='Completed'])[1]",
+  "totalCancelledView": "xpath~~(//lava-icn[@hint='Cancelled'])[1]",
+  "totalCancelIcon": "xpath~~//lava-btn[@id='btn-cancel-application']//button[1]",
+  "reasonButton": "xpath~~//span[contains(@class, 'button-text') and normalize-space(text())='Reasons']",
+  "reasonCheckBox1": "xpath~~(//div[contains(@class, 'ag-cell') and contains(@class, 'ag-grid-checkbox-center')])[1]",
+  "selectButton": "xpath~~//span[contains(@class, 'button-text') and normalize-space(text())='Select']",
+  "confirmButton": "xpath~~//span[contains(@class, 'button-text') and normalize-space(text())='Confirm']",
+  "approveIcon": "xpath~~//lava-btn[@id='btn-Approve']//button[.//span[contains(text(),'Approve')]]"
 }

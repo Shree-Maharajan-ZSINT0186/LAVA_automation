@@ -1,43 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extentreports>
   <configuration>
-    <!-- report theme --> <!-- standard, dark -->
-    <theme>dark</theme>
-  
-    <!-- document encoding -->  <!-- defaults to UTF-8 -->
+    <!-- Report theme --> <!-- Options: standard, dark -->
+    <theme>Standard</theme>
+
+    <!-- Document encoding -->
     <encoding>UTF-8</encoding>
-    
-    <!-- protocol for script and stylesheets -->   <!-- defaults to https -->
+
+    <!-- Protocol for script and stylesheets -->
     <protocol>https</protocol>
-    
-    <!-- title of the document -->
+
+    <!-- Title of the document -->
     <documentTitle>Test Automation</documentTitle>
-    
-    <!-- report name - displayed at top-nav -->
+
+    <!-- Report name - displayed at top-nav -->
     <reportName>LAVA - Sanity Automation</reportName>
-    
-    <!-- global date format override -->  <!-- defaults to yyyy-MM-dd -->
+
+    <!-- Global date format override -->
     <dateFormat>yyyy-MM-dd</dateFormat>
-    
-    <!-- global time format override -->   <!-- defaults to HH:mm:ss -->
+
+    <!-- Global time format override -->
     <timeFormat>HH:mm:ss</timeFormat>
 
-    <!-- set the time zone to Indian Standard Time (IST) -->
+    <!-- Time zone -->
     <timeZone>Asia/Kolkata</timeZone>
-    
-    <!-- custom javascript -->
+
+    <!-- Show chart on load -->
+    <chartVisibilityOnOpen>true</chartVisibilityOnOpen>
+
+    <!-- Enable timeline chart -->
+    <timelineEnabled>true</timelineEnabled>
+
+    <!-- Custom JavaScript -->
     <scripts>
       <![CDATA[
         $(document).ready(function() {
-        
+            console.log("Extent Report Ready");
         });
       ]]>
     </scripts>
-    
-    <!-- custom styles -->
+
+    <!-- Custom Styles -->
     <styles>
       <![CDATA[
-        
+        .test-info {
+          color: #00e676 !important;
+          font-weight: bold;
+        }
+        .nav-wrapper {
+          background-color: #1e1e2f !important;
+        }
       ]]>
     </styles>
   </configuration>
