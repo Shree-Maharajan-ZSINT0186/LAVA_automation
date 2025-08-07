@@ -1,5 +1,6 @@
 package StepDef.Web;
 import Helpers.*;
+import jdk.jshell.execution.Util;
 import org.junit.Assert;
 
 import io.cucumber.java.en.And;
@@ -30,6 +31,7 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
     public void launchTheApplication() throws Throwable {
 
         try {
+            Utils.highlightedStepInfoLog("Create application with existing title");
             //ExtentReportSetup.test = ExtentReportSetup.createtheTest("Login To LAC");
             WebActions.launchApplication("Examiner_host");
 
@@ -41,7 +43,7 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             WebActions.setWaitTime(6000);
             String tenantValue = WebActions.getElementText(ExaminerLoginLocators, "tenantValueText");
             System.out.println("tenant" +tenantValue);
-            Utils.stepInfoLog("The added tenant value is: " +tenantValue);
+
 
             //Entering Username and Password
             String userName = YamlLoader.getUserNameAndPasswordFromYamlBasedOnURL(yamlFileName,  "Examiner", "Examiner_username");
@@ -63,29 +65,33 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             }else {
                 System.out.println("Login is done");
             }
+            WebActions.setWaitTime(2000);
+//            WebActions.isElementDisplayed(ExaminerCreateTitleLocators, "incompletePopUp");
+            int incompletePopUp = WebActions.getElementSize(ExaminerCreateTitleLocators, "incompletePopUp");
+            System.out.println("val:" +incompletePopUp);
+            if(incompletePopUp == 1) {
+                WebActions.setWaitTime(1000);
+                WebActions.clickOn(ExaminerCreateTitleLocators, "incompletePopupNoButton");
+            }else {
+                System.out.println("No incomplete works proceed with title creation");
+            }
 
             // Verifying whether logged in
             boolean HomeDashboardPageTitle = WebActions.isElementDisplayed(ExaminerLoginLocators, "homePage");
             String HomeDashboardPageTitleText = WebActions.getElementText(ExaminerLoginLocators, "homePage");
             if (HomeDashboardPageTitle) {
-                Assert.assertTrue("work queue title is displayed" +HomeDashboardPageTitleText, HomeDashboardPageTitle);
+                Assert.assertTrue("work queue tab is displayed" +HomeDashboardPageTitleText, HomeDashboardPageTitle);
             } else {
-                Assert.fail("work queue title is NOT displayed");
+                Assert.fail("work queue tab is NOT displayed");
             }
-            int incompletePopUp = WebActions.getElementSize(ExaminerCreateTitleLocators, "incompletePopUp");
-            System.out.println("val:" +incompletePopUp);
-            if(incompletePopUp == 1) {
-                WebActions.setWaitTime(1000);
-                WebActions.JSclickOn(ExaminerCreateTitleLocators, "incompletePopupNoButton");
-            }else {
-                System.out.println("No incomplete works proceed with title creation");
-            }
+
+            Utils.stepInfoLog("Tenant" +tenantValue);
             Utils.passedTestLog("Examiner is logged in to the workbench application sucessfully");
         } catch (Exception e) {
-            Utils.failedTestLog("There is an issue in logging");
+            Utils.failedTestLog("There is an issue in logging in");
             ScreenShotCapture.importScreenToReports("examiner Login");
+            Assert.fail("Failed to login to the workbench as Examiner.");
             e.printStackTrace();
-            //Assert.fail("Dashboard page title is NOT displayed");
         }
     }
     @And("Navigate to the standalone title tab")
@@ -99,7 +105,8 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             Utils.passedTestLog("Examiner navigated to standalone title tab");
         } catch (Throwable e) {
             Utils.failedTestLog("There is an issue while navigating to the standalone title tab");
-            ScreenShotCapture.importScreenToReports("standalone title tab");
+            ScreenShotCapture.importScreenToReports("navigateToTheStandAloneTitleTab");
+            Assert.fail("Cannot navigate to the stand alone title tab");
             e.printStackTrace();
         }
     }
@@ -112,8 +119,6 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             WebActions.waitForElementToVisible(ExaminerCreateTitleLocators, "addTitleIcon");
             WebActions.clickOn(ExaminerCreateTitleLocators, "addTitleIcon");
 
-            
-
             // in parties tab click search icon
             WebActions.clickOn(ExaminerCreateTitleLocators, "createTitleSearchPartiesIcon");
             WebActions.setWaitTime(5000);
@@ -123,19 +128,20 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             WebActions.setWaitTime(1000);
             WebActions.waitForElementToVisible(ExaminerCreateTitleLocators, "partiesNameTextbox");
             WebActions.enterTextOn(ExaminerCreateTitleLocators, "partiesNameTextbox",
-                    JSONReader.getJSONDataBlockKey("PartiesData", "Party", "name"));
-            String partyName = JSONReader.getJSONDataBlockKey("PartiesData", "Party", "name");
-            Utils.stepInfoLog("The selected Party name is:" +partyName);
+                    JSONReader.getJSONDataBlockKey("createTitle", "Party", "name"));
+            String partyName = JSONReader.getJSONDataBlockKey("createTitle", "Party", "name");
             WebActions.setWaitTime(1000);
             WebActions.clickOn(ExaminerCreateTitleLocators, "searchParties");
             WebActions.setWaitTime(5000);
             WebActions.clickOn(ExaminerCreateTitleLocators, "partiesNameTextbox");
             WebActions.performTabAndSpace(16);
             WebActions.clickOn(ExaminerCreateTitleLocators, "addPartyButton");
-            Utils.passedTestLog("Party is added sucessfully");
+            Utils.stepInfoLog("Party Name" +partyName);
+            Utils.passedTestLog("Party is added sucessfully for creating title");
         } catch (Throwable e) {
-            Utils.failedTestLog("There is an issue while adding party");
-            ScreenShotCapture.importScreenToReports("Application_details");
+            Utils.failedTestLog("Failed to add party while creating title");
+            ScreenShotCapture.importScreenToReports("party_details_while_creating_title");
+            Assert.fail("Failed to enter the party details of new title");
         }
     }
      @And("Add parcel details of new title")
@@ -152,7 +158,8 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             WebActions.clickOn(ExaminerCreateTitleLocators,"parcelClearButton");
             WebActions.setWaitTime(1500);
             WebActions.enterTextOn(ExaminerCreateTitleLocators, "parclesIDTextbox",
-                    JSONReader.getJSONDataBlockKey("TitleAndParcelsData", "Parcel", "parcelID"));
+                    JSONReader.getJSONDataBlockKey("createTitle", "Parcel", "parcelID"));
+            String parcelID=JSONReader.getJSONDataBlockKey("createTitle", "Parcel", "parcelID");
             WebActions.clickOn(ExaminerCreateTitleLocators, "searchParcels");
             WebActions.setWaitTime(2000);
             WebActions.clickOn(ExaminerCreateTitleLocators, "titleIDTextBox");
@@ -161,11 +168,12 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             // click add button
             WebActions.setWaitTime(3000);
             WebActions.clickOn(ExaminerCreateTitleLocators, "addParcelButton");
-
-            Utils.passedTestLog("Parcel is added sucessfully");
+            Utils.stepInfoLog("parcel ID"+parcelID);
+            Utils.passedTestLog("Parcel is added sucessfully for creating title");
         } catch (Throwable e) {
-            Utils.failedTestLog("There is an issue while adding parcel");
-            ScreenShotCapture.importScreenToReports("Application_details");
+            Utils.failedTestLog("Failed to add parcel while creating title");
+            ScreenShotCapture.importScreenToReports("ParcelDetailsOfNewTitle");
+            Assert.fail("Failed to enter the parcel details of new title");
         }
     }
 
@@ -179,9 +187,12 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             String titleID= WebActions.getValueAttribute(ExaminerCreateTitleLocators,"newTitleID");
             System.out.println("Captured Title ID: " + titleID);
             Store.addTitleId(titleID);
+            Utils.stepInfoLog("New Title ID"+titleID);
+            Utils.passedTestLog("successfully got new titleId");
         } catch(Throwable e){
-            Utils.failedTestLog("There is an issue while getting titleID");
-            ScreenShotCapture.importScreenToReports("Application_details");
+            Utils.failedTestLog("Failed to get the new TitleID");
+            ScreenShotCapture.importScreenToReports("getNewTitleId");
+            Assert.fail("Failed to get the newly created Title ID");
         }
     }
 
@@ -199,14 +210,10 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
 //            BAU relationship
             WebActions.setWaitTime(1500);
             WebActions.clickOn(ExaminerCreateTitleLocators,"BAUHeading");
-            int parentTitle=WebActions.getElementSize(ExaminerCreateTitleLocators,"titleId");
-            if(parentTitle==1){
-                WebActions.clickOn(ExaminerCreateTitleLocators,"titleId");
-                WebActions.clickOn(ExaminerCreateTitleLocators,"titleOption");
-                WebActions.performTab(1);
-            }
 
-
+            WebActions.clickOn(ExaminerCreateTitleLocators,"titleId");
+            WebActions.clickOn(ExaminerCreateTitleLocators,"titleOption");
+            WebActions.performTab(1);
 
 
             WebActions.waitForElementToVisible(ExaminerCreateTitleLocators,"relationship");
@@ -283,18 +290,16 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
 
             System.out.print("titles created"+Store.getTitleIds());
             WebActions.setWaitTime(1500);
-            WebActions.waitForElementToVisible(ExaminerCreateTitleLocators,"ApproveButton");
-            WebActions.isElementClickable(ExaminerCreateTitleLocators,"ApproveButton");
             WebActions.clickOn(ExaminerCreateTitleLocators,"ApproveButton");
             WebActions.setWaitTime(1500);
-            WebActions.waitForElementToVisible(ExaminerCreateTitleLocators,"approveYesButton");
-            WebActions.isElementClickable(ExaminerCreateTitleLocators,"approveYesButton");
             WebActions.clickOn(ExaminerCreateTitleLocators,"approveYesButton");
-            WebActions.setWaitTime(6000);
+            WebActions.setWaitTime(10000);
+            Utils.passedTestLog("Details of new Title are entered successfully");
         }catch(Throwable e){
-            System.out.println("issue while approving title"+e.getMessage());
-            Utils.failedTestLog("There is an issue while getting titleID");
-            ScreenShotCapture.importScreenToReports("Application_details");
+
+            Utils.failedTestLog("Failed to enter details and complete the approval process.");
+            Assert.fail("Failed To Create title using standalone title creation");
+            ScreenShotCapture.importScreenToReports("newTitleDetails");
 
         }
     }
@@ -308,6 +313,7 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             addParcelDetailsOfNewTitle();
             getNewTitleID();
             enterNewTitleDetails();
+            WebActions.setWaitTime(10000);
         }
     }
 

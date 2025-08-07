@@ -26,6 +26,8 @@
 "date": "xpath~~//span[normalize-space(text())='19']",
 "applicationSearchFilter": "xpath~~//input[@id='applications-filter']",
 "applicationEditButton": "xpath~~//lava-btn[@icon='edit']",
-"descriptionTextBoxValue": "xpath~~//textarea[@maxlength='4000']"
+"descriptionTextBoxValue": "xpath~~//textarea[@maxlength='4000']",
+  "applicationFilterTextBox": "xpath~~//input[@placeholder='Filter']",
+  "applicationStatus": "xpath~~//section[contains(@class, 'lava-app-states-wrap')]//a[contains(@class, 'cancelled') and contains(text(), 'Cancelled')]"
 
 }

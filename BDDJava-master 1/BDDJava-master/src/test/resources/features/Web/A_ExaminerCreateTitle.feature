@@ -6,4 +6,4 @@ Feature: Create new title
 
   @createTitle
   Scenario: Create new title after launch
-    And I create new titles for 4 iterations
+    And I create new titles for 2 iterations

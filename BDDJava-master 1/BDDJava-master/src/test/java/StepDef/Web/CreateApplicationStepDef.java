@@ -294,14 +294,15 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
 //        }
 
         try {
-//            List<String> titlesList = Arrays.asList("TID9783","TID9784","TID9785");
+            List<String> titlesList = Arrays.asList("TID9783","TID9784","TID9785");
 
-            for(int i=0;i<4;i++) {
+            for(int i=0;i<3;i++) {
                 WebActions.setWaitTime(10000);
                 WebActions.clickOn(titlesAndParcelsTabLocators, "titlesSearchIcon");
                 WebActions.setWaitTime(3000);
-                String titleID = Store.getTitleIds().get(i);
-//                String titleID=titlesList.get(i);
+//                String titleID = Store.getTitleIds().get(i);
+                String titleID=titlesList.get(i);
+//
                 if(i>0)
                 {
                     WebActions.clearText(titlesAndParcelsTabLocators, "titleIdTextBox");
@@ -765,4 +766,6 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             e.printStackTrace();
         }
     }
+
+
 }

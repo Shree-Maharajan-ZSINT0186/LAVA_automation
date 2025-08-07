@@ -1,0 +1,7 @@
+{
+"cancelButton": "xpath~~//span[contains(@class, 'button-text') and normalize-space(text())='Cancel']",
+ "reasonButton": "xpath~~//span[contains(@class, 'button-text') and normalize-space(text())='Reasons']",
+  "reasonCheckBox1": "xpath~~(//div[contains(@class, 'ag-cell') and contains(@class, 'ag-grid-checkbox-center')])[1]",
+  "selectButton": "xpath~~//span[contains(@class, 'button-text') and normalize-space(text())='Select']",
+  "confirmButton": "xpath~~//span[contains(@class, 'button-text') and normalize-space(text())='Confirm']"
+}

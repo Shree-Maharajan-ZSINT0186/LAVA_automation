@@ -4,6 +4,12 @@
   },
   "document": {
     "documentId": "DOC0484"
+  },
+  "Party": {
+    "name": "Ora Jones"
+  },
+  "Parcel": {
+    "parcelID": "PID0258"
   }
 
 }

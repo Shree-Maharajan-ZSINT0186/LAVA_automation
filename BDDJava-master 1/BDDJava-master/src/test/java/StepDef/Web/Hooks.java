@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.TimeZone;
 
+import io.cucumber.java.*;
 import org.openqa.selenium.WebDriver;
 
 import Helpers.ExtentReportSetup;
@@ -17,10 +18,6 @@ import Helpers.Utils;
 import Helpers.WebActions;
 import Helpers.YamlLoader;
 import Runner.TestRunner;
-import io.cucumber.java.After;
-import io.cucumber.java.AfterAll;
-import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
 
 
 public class Hooks {
@@ -28,7 +25,7 @@ public class Hooks {
 	static WebActions actions = new WebActions();
 	static String screenShotPath = null;
 	public String AccountPageLocators =  "AccountPageLocators";
-	
+
 	
 	@Before(order=1)
 	public void beforeScenario(Scenario scenario) throws Exception{
