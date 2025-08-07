@@ -33,14 +33,14 @@ import io.cucumber.junit.Cucumber;
 @RunWith(Cucumber.class)
 
 @CucumberOptions(
-		features = "src/test/resources/features/Web/AA_A.feature",
+		features = "src/test/resources/features/Web/A_ExaminerCreateTitle.feature",
 		glue = "StepDef", 
 		monochrome = true,
 		publish = true,
 		dryRun = false,
 		snippets = SnippetType.CAMELCASE,
 		//tags= "@15mins or @Hourly or @Daily or @3Days or @1Week",
-		tags= "@application",
+		tags= "@createTitleFeature",
 		plugin = {"pretty",
 				"json:target/cucumber-reports/json-report.json", // JSON report
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

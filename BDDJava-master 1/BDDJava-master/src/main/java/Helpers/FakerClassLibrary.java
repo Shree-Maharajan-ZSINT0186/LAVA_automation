@@ -90,6 +90,21 @@ public class FakerClassLibrary{
         }
         return descriptionList.get(faker.number().numberBetween(0, 5));
     }
+
+    public String getData(String data,String filename)
+    {
+        JSONObject jo = (JSONObject) JsonFileParser.getJsonFileObject(userDirectory+"\\src\\test\\resources\\testDataJSON\\Web\\"+filename+".json");
+        // Extract JSON array
+        System.out.print("jo"+jo);
+        JSONArray jsonArray = (JSONArray) jo.get(data);
+
+        // Convert JSONArray to List<String>
+        List<String> descriptionList = new ArrayList<>();
+        for (Object obj : jsonArray) {
+            descriptionList.add((String) obj);
+        }
+        return descriptionList.get(faker.number().numberBetween(0, 3));
+    }
  
 public String getEmailAddress()
     {

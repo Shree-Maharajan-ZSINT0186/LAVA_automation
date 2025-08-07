@@ -1,5 +1,6 @@
 package StepDef.Web;
 import Helpers.*;
+import com.github.javafaker.Faker;
 import jdk.jshell.execution.Util;
 import org.junit.Assert;
 
@@ -66,15 +67,22 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
                 System.out.println("Login is done");
             }
             WebActions.setWaitTime(2000);
-//            WebActions.isElementDisplayed(ExaminerCreateTitleLocators, "incompletePopUp");
-            int incompletePopUp = WebActions.getElementSize(ExaminerCreateTitleLocators, "incompletePopUp");
-            System.out.println("val:" +incompletePopUp);
-            if(incompletePopUp == 1) {
+            boolean  isPopupDisplayed= WebActions.isElementDisplayed(ExaminerCreateTitleLocators, "incompletePopUp");
+            System.out.println("incomplete works"+isPopupDisplayed);
+            if(isPopupDisplayed) {
                 WebActions.setWaitTime(1000);
                 WebActions.clickOn(ExaminerCreateTitleLocators, "incompletePopupNoButton");
             }else {
                 System.out.println("No incomplete works proceed with title creation");
             }
+//            int incompletePopUp = WebActions.getElementSize(ExaminerCreateTitleLocators, "incompletePopUp");
+//            System.out.println("val:" +incompletePopUp);
+//            if(incompletePopUp == 1) {
+//                WebActions.setWaitTime(1000);
+//                WebActions.clickOn(ExaminerCreateTitleLocators, "incompletePopupNoButton");
+//            }else {
+//                System.out.println("No incomplete works proceed with title creation");
+//            }
 
             // Verifying whether logged in
             boolean HomeDashboardPageTitle = WebActions.isElementDisplayed(ExaminerLoginLocators, "homePage");
@@ -120,16 +128,17 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             WebActions.clickOn(ExaminerCreateTitleLocators, "addTitleIcon");
 
             // in parties tab click search icon
+            WebActions.setWaitTime(5000);
             WebActions.clickOn(ExaminerCreateTitleLocators, "createTitleSearchPartiesIcon");
             WebActions.setWaitTime(5000);
 
             // enter party name in text box and search
             WebActions.clickOn(ExaminerCreateTitleLocators,"partiesClearButton");
             WebActions.setWaitTime(1000);
-            WebActions.waitForElementToVisible(ExaminerCreateTitleLocators, "partiesNameTextbox");
-            WebActions.enterTextOn(ExaminerCreateTitleLocators, "partiesNameTextbox",
-                    JSONReader.getJSONDataBlockKey("createTitle", "Party", "name"));
-            String partyName = JSONReader.getJSONDataBlockKey("createTitle", "Party", "name");
+//            WebActions.waitForElementToVisible(ExaminerCreateTitleLocators, "partiesNameTextbox");
+            String partyName = faker.getData("party","createTitle");
+            WebActions.enterTextOn(ExaminerCreateTitleLocators, "partiesNameTextbox",partyName);
+
             WebActions.setWaitTime(1000);
             WebActions.clickOn(ExaminerCreateTitleLocators, "searchParties");
             WebActions.setWaitTime(5000);
@@ -157,9 +166,11 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             WebActions.setWaitTime(1000);
             WebActions.clickOn(ExaminerCreateTitleLocators,"parcelClearButton");
             WebActions.setWaitTime(1500);
-            WebActions.enterTextOn(ExaminerCreateTitleLocators, "parclesIDTextbox",
-                    JSONReader.getJSONDataBlockKey("createTitle", "Parcel", "parcelID"));
-            String parcelID=JSONReader.getJSONDataBlockKey("createTitle", "Parcel", "parcelID");
+//            WebActions.enterTextOn(ExaminerCreateTitleLocators, "parclesIDTextbox",
+//                    JSONReader.getJSONDataBlockKey("createTitle", "Parcel", "parcelID"));
+//            String parcelID=JSONReader.getJSONDataBlockKey("createTitle", "Parcel", "parcelID");
+            String parcelID = faker.getData("parcel","createTitle");
+            WebActions.enterTextOn(ExaminerCreateTitleLocators, "parclesIDTextbox",parcelID);
             WebActions.clickOn(ExaminerCreateTitleLocators, "searchParcels");
             WebActions.setWaitTime(2000);
             WebActions.clickOn(ExaminerCreateTitleLocators, "titleIDTextBox");
@@ -221,8 +232,11 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             WebActions.clickOn(ExaminerCreateTitleLocators,"relationshipRoot");
 
             //description
-            String expectedDescriptionValue = faker.getDescription();
-            WebActions.enterTextOn(ExaminerCreateTitleLocators,"description",expectedDescriptionValue);
+//            String expectedDescriptionValue = faker.getDescription();
+//            WebActions.enterTextOn(ExaminerCreateTitleLocators,"description",expectedDescriptionValue);
+
+            String description = faker.getData("description","createTitle");
+            WebActions.enterTextOn(ExaminerCreateTitleLocators, "description",description);
 
             //search and add document
             WebActions.clickOn(ExaminerCreateTitleLocators,"documentSearch1");
@@ -230,9 +244,11 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             WebActions.clickOn(ExaminerCreateTitleLocators,"documentClearButton");
             WebActions.setWaitTime(1000);
             WebActions.JSclickOn(ExaminerCreateTitleLocators, "documentIDTextBox");
-            WebActions.enterTextOn(ExaminerCreateTitleLocators, "documentIDTextBox",
-                    JSONReader.getJSONDataBlockKey("createTitle", "document", "documentId"));
-            String documentID = JSONReader.getJSONDataBlockKey("createTitle", "document", "documentId");
+//            WebActions.enterTextOn(ExaminerCreateTitleLocators, "documentIDTextBox",
+//                    JSONReader.getJSONDataBlockKey("createTitle", "document", "documentId"));
+//            String documentID = JSONReader.getJSONDataBlockKey("createTitle", "document", "documentId");
+            String documentID = faker.getData("document","createTitle");
+            WebActions.enterTextOn(ExaminerCreateTitleLocators, "documentIDTextBox",documentID);
             WebActions.setWaitTime(1000);
             WebActions.JSclickOn(ExaminerCreateTitleLocators, "documentTextBoxSearchIcon");
             WebActions.setWaitTime(4000);
@@ -293,7 +309,7 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             WebActions.clickOn(ExaminerCreateTitleLocators,"ApproveButton");
             WebActions.setWaitTime(1500);
             WebActions.clickOn(ExaminerCreateTitleLocators,"approveYesButton");
-            WebActions.setWaitTime(10000);
+            WebActions.setWaitTime(2500);
             Utils.passedTestLog("Details of new Title are entered successfully");
         }catch(Throwable e){
 
@@ -313,7 +329,6 @@ public class ExaminerCreateTitleStepDef extends FakerClassLibrary{
             addParcelDetailsOfNewTitle();
             getNewTitleID();
             enterNewTitleDetails();
-            WebActions.setWaitTime(10000);
         }
     }
 

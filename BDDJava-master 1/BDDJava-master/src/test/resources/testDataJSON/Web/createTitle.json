@@ -1,15 +1,37 @@
 {
-  "validation": {
-    "validationSucessMsg": "Title is valid"
-  },
-  "document": {
-    "documentId": "DOC0484"
-  },
-  "Party": {
-    "name": "Ora Jones"
-  },
-  "Parcel": {
-    "parcelID": "PID0258"
-  }
+  "party": [
+    "Ana Vang",
+    "Dofasco",
+    "Dofasco",
+    "Dofasco"
+  ],
 
+  "parcel": [
+    "PID130",
+    "PID131",
+    "PID132",
+    "PID133"
+
+  ],
+  "document": [
+    "DOC9234",
+    "DOC40620",
+    "DOC34419",
+    "DOC4803"
+  ],
+
+
+  "amount":[
+    "900000",
+    "200000",
+    "800000",
+    "600000"
+  ],
+
+  "description": [
+    "Conveyancing property on land adjacent to Glover Square -- Lease , Transfer of ownership",
+    "Conveyance of Brads house -- Mortgage Registration",
+    "Subdivision of 45 Weldon Rd --- Subdivision Service",
+    "Transfer and mortage registration for Mrs Stower -- Transfer and Mortgage"
+  ]
 }
