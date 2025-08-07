@@ -2,7 +2,6 @@
 	"MortgageService": {
 		"serviceName": "Mortgage Registration",
 		"documentId": "DOC0484",
-
 		"typeValue": "Accelerated",
 		"amountValue": "900000"
 	},
@@ -36,6 +35,41 @@
 		"applicationValidationSucessMsg": "Application information is valid",
 		"confirmPass": "Password@123",
 		"status": "Lodged"
-	}
-
+	},
+	"amount":[
+		"900000",
+		"200000",
+		"800000",
+		"600000",
+		"700000",
+		"860000"
+	],
+	"conditionName":[
+		"Court Order",
+		"Boundary Fence",
+		"Common Area Maintenance"
+	],
+	"conditionDescription":[
+		"Court order should not be there for the titles",
+		"Unless the Minister directs otherwise the Lessee shall fence the boundaries of the land within 6 (six) months of the date of the grant and the Lessee shall maintain the fence to the satisfaction of the Commissioner.",
+		"The lessee shall share common area costs. Examples include fees for snow removal, janitorial services, landscaping, grass cutting and property management"
+	],
+	"mortgageDocument": [
+		"DOC0118",
+		"DOC0484",
+		"DOC0263",
+		"DOC0245"
+	],
+	"leaseDocument": [
+		"DOC0104",
+		"DOC0108",
+		"DOC0119",
+		"DOC0153"
+	],
+	"transferOfOwnershipDocument": [
+		"DOC0146",
+		"DOC0147",
+		"DOC0162",
+		"DOC0239"
+	]
 }

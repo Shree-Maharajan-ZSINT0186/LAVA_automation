@@ -90,8 +90,87 @@ public class FakerClassLibrary{
         }
         return descriptionList.get(faker.number().numberBetween(0, 5));
     }
+    public String getAmount()
+    {
+        JSONObject jo = (JSONObject) JsonFileParser.getJsonFileObject(userDirectory+"\\src\\test\\resources\\testDataJSON\\Web\\ServiceData.json");
+        // Extract JSON array
+        JSONArray jsonArray = (JSONArray) jo.get("amount");
+
+        // Convert JSONArray to List<String>
+        List<String> amountList = new ArrayList<>();
+        for (Object obj : jsonArray) {
+            amountList.add((String) obj);
+        }
+        return amountList.get(faker.number().numberBetween(0, 5));
+    }
+    public String getConditionName()
+    {
+        JSONObject jo = (JSONObject) JsonFileParser.getJsonFileObject(userDirectory+"\\src\\test\\resources\\testDataJSON\\Web\\ServiceData.json");
+        // Extract JSON array
+        JSONArray jsonArray = (JSONArray) jo.get("conditionName");
+
+        // Convert JSONArray to List<String>
+        List<String> conditionNameList = new ArrayList<>();
+        for (Object obj : jsonArray) {
+            conditionNameList.add((String) obj);
+        }
+        return conditionNameList.get(faker.number().numberBetween(0, 2));
+    }
+    public String getConditionDescription()
+    {
+        JSONObject jo = (JSONObject) JsonFileParser.getJsonFileObject(userDirectory+"\\src\\test\\resources\\testDataJSON\\Web\\ServiceData.json");
+        // Extract JSON array
+        JSONArray jsonArray = (JSONArray) jo.get("conditionDescription");
+
+        // Convert JSONArray to List<String>
+        List<String> conditionDescriptionList = new ArrayList<>();
+        for (Object obj : jsonArray) {
+            conditionDescriptionList.add((String) obj);
+        }
+        return conditionDescriptionList.get(faker.number().numberBetween(0, 2));
+    }
+    public String getMortgageDocument()
+    {
+        JSONObject jo = (JSONObject) JsonFileParser.getJsonFileObject(userDirectory+"\\src\\test\\resources\\testDataJSON\\Web\\ServiceData.json");
+        // Extract JSON array
+        JSONArray jsonArray = (JSONArray) jo.get("mortgageDocument");
+
+        // Convert JSONArray to List<String>
+        List<String> mortgageDocumentList = new ArrayList<>();
+        for (Object obj : jsonArray) {
+            mortgageDocumentList.add((String) obj);
+        }
+        return mortgageDocumentList.get(faker.number().numberBetween(0, 2));
+    }
+    public String getLeaseDocument()
+    {
+        JSONObject jo = (JSONObject) JsonFileParser.getJsonFileObject(userDirectory+"\\src\\test\\resources\\testDataJSON\\Web\\ServiceData.json");
+        // Extract JSON array
+        JSONArray jsonArray = (JSONArray) jo.get("leaseDocument");
+
+        // Convert JSONArray to List<String>
+        List<String> leaseDocumentList = new ArrayList<>();
+        for (Object obj : jsonArray) {
+            leaseDocumentList.add((String) obj);
+        }
+        return leaseDocumentList.get(faker.number().numberBetween(0, 2));
+    }
+    public String getTransferOfOwnershipDocument()
+    {
+        JSONObject jo = (JSONObject) JsonFileParser.getJsonFileObject(userDirectory+"\\src\\test\\resources\\testDataJSON\\Web\\ServiceData.json");
+        // Extract JSON array
+        JSONArray jsonArray = (JSONArray) jo.get("transferOfOwnershipDocument");
+
+        // Convert JSONArray to List<String>
+        List<String> transferOfOwnershipDocumentList = new ArrayList<>();
+        for (Object obj : jsonArray) {
+            transferOfOwnershipDocumentList.add((String) obj);
+        }
+        return transferOfOwnershipDocumentList.get(faker.number().numberBetween(0, 2));
+    }
+
  
-public String getEmailAddress()
+    public String getEmailAddress()
     {
         return faker.internet().emailAddress();
     }

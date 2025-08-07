@@ -89,6 +89,7 @@ public class Hooks {
 		String Sentmail =String.valueOf(testDataValues.get("SentMail"));
 		String sceStatus = scenario.getStatus().toString();
 		GlobalData.scenarioStatus.add(sceStatus);
+
 		if (scenario.isFailed()) {
 			int failureCount = 0;
 			WebActions.testStatus = "Failed";

@@ -2,6 +2,7 @@ package StepDef.Web;
 
 import Helpers.*;
 import Helpers.Store;
+import net.bytebuddy.asm.MemberSubstitution;
 import org.junit.Assert;
 
 import Helpers.ExtentReportSetup;
@@ -50,6 +51,7 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
 
         try {
             //ExtentReportSetup.test = ExtentReportSetup.createtheTest("Login To LAC");
+            Utils.highlightedStepInfoLog("Agent Lodge Application");
             WebActions.launchApplication("Agent_host");
 
             WebActions.waitForElementToVisible(loginLocators, "loginPageTitle");
@@ -82,7 +84,6 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             } else {
                 System.out.println("Login is done");
             }
-
             // Verifying whether logged in
             boolean HomeDashboardPageTitle = WebActions.isElementDisplayed(loginLocators, "homeDashboardPage");
             String HomeDashboardPageTitleText = WebActions.getElementText(loginLocators, "homeDashboardPage");
@@ -93,7 +94,7 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             }
             Utils.passedTestLog("Agent is logged in to the application sucessfully");
         } catch (Exception e) {
-            Utils.failedTestLog("There is an issue in logging");
+            Utils.failedTestLog("Agent login failed");
             ScreenShotCapture.importScreenToReports("Login");
             e.printStackTrace();
             //Assert.fail("Dashboard page title is NOT displayed");
@@ -105,9 +106,9 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
         //ExtentReportSetup.test = ExtentReportSetup.createtheTest("Navigation to Application Tab");
         try {
             WebActions.clickOn(applicationLocators, "applicationTab");
-            Utils.passedTestLog("Agent Navigated to the Application Tab");
+            Utils.passedTestLog("Agent navigated to the Application tab sucessfully");
         } catch (Throwable e) {
-            Utils.failedTestLog("There is an issue while navigating to the Application tab");
+            Utils.failedTestLog("Agent navigation to the Application tab failed");
             ScreenShotCapture.importScreenToReports("Application_tab");
             e.printStackTrace();
         }
@@ -127,15 +128,12 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             String expectedReferenceNumber = faker.getReferenceNumber(faker.getRandomNumberBetween(minlength, maxlength));
             expected_Details_Dict.put("Reference Number", expectedReferenceNumber);
             WebActions.enterTextOn(applicationLocators, "fileReferenceTextBox", expectedReferenceNumber);
-            Utils.stepInfoLog("The added ReferenceNumber value is: " + expectedReferenceNumber);
-
 
             //Entering value in the Description text box
             String expectedDescriptionValue = faker.getDescription();
             System.out.println("description from faker" + expectedDescriptionValue);
             expected_Details_Dict.put("Description", expectedDescriptionValue);
             WebActions.enterTextOn(applicationLocators, "descriptionTextBox", expectedDescriptionValue);
-            Utils.stepInfoLog("The added Description is: " + expectedDescriptionValue);
 
             //Entering value for client name
             WebActions.clickOn(applicationLocators, "clientNameTextBox");
@@ -143,7 +141,6 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             System.out.println("Client name from faker" + expectedClientName);
             expected_Details_Dict.put("ClientName", expectedClientName);
             WebActions.enterTextOn(applicationLocators, "clientNameTextBox", expectedClientName);
-            Utils.stepInfoLog("The added client name is: " + expectedClientName);
 
             //Address field
             WebActions.clickOn(applicationLocators, "addressTextBoxClick");
@@ -152,7 +149,15 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             System.out.println(expectedAddress);
             expected_Details_Dict.put("Address", expectedAddress);
             WebActions.enterTextOn(applicationLocators, "addressTextBoxClick", expectedAddress);
-            Utils.stepInfoLog("The added Address value is: " + expectedAddress);
+
+            Utils.stepInfoLog(
+                    "Added Details:<br>" +
+                            "Reference Number: " + expectedReferenceNumber + "<br>" +
+                            "Description     : " + expectedDescriptionValue + "<br>" +
+                            "Client Name     : " + expectedClientName + "<br>" +
+                            "Address         : " + expectedAddress
+            );
+
 
             //select department
             WebActions.setWaitTime(1000);
@@ -162,9 +167,9 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.clickOn(applicationLocators, "applicationCreatebutton");
             WebActions.setWaitTime(3000);
             RefferenceID = WebActions.getValueAttribute(applicationLocators, "fileReferenceTextBox");
-            Utils.passedTestLog("Application is created");
+            Utils.passedTestLog("Application created successfully");
         } catch (Throwable e) {
-            Utils.failedTestLog("There is an issue while creating application");
+            Utils.failedTestLog("Application creation failed");
             ScreenShotCapture.importScreenToReports("Application_details");
         }
     }
@@ -182,17 +187,17 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             } else {
                 Assert.fail("Application ID is not displayed successfully");
             }
-            Utils.stepInfoLog("The generated Application Id is:" + applicationID);
-            Utils.passedTestLog("Application is created sucessfully");
+            Utils.stepInfoLog("Generated Application ID: " + applicationID);
+            Utils.passedTestLog("Application ID was generated successfully");
 
 
         } catch (Throwable e) {
-            Utils.failedTestLog("There is an issue while creating application, so Application ID is not generated");
+            Utils.failedTestLog("Failed to create application. Application ID was not generated");
             ScreenShotCapture.importScreenToReports("Application_ID");
         }
     }
 
-    @Then("The added application details should be saved sucessfully")
+    @Then("The added application details should be saved successfully")
     public void applicationDetailsCheck() throws Exception {
         //ExtentReportSetup.test = ExtentReportSetup.createtheTest("Validation for Application Details");
         try {
@@ -232,30 +237,30 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
                     System.out.println("passed");
                 } else {
 
-                    Utils.failedTestLog("The added values in the create new application is not displayed");
+                    Utils.failedTestLog("The application details added in 'Create New Application' are not displayed");
                     Assert.fail("Validation failed: The application details are not displayed");
 
                 }
             }
-            Utils.passedTestLog("The added values in the create new application is displayed");
+            Utils.passedTestLog("The application details added in 'Create New Application' are displayed successfully");
         } catch (Throwable e) {
-            System.out.print("details checking after creating application");
+            System.out.print("The application details are not saved");
             e.printStackTrace();
-            Utils.failedTestLog("The added values in the create new application is not displayed: " + e.getMessage());
+            Utils.failedTestLog("An error occurred while verifying application details");
             ScreenShotCapture.importScreenToReports("Application_details");
             Assert.fail("Validation failed");
         }
 
     }
 
-    @When("Agent should be navigated to the Title tab")
+    @Then("Agent should be navigated to the Title tab")
     public void navigateToTheTitleTab() throws Exception {
         //ExtentReportSetup.test = ExtentReportSetup.createtheTest("Navigation to the Title tab");
         try {
             WebActions.clickOn(titlesAndParcelsTabLocators, "titlesAndParcelsTab");
-            Utils.passedTestLog("Agent is navigated to the Title tab");
+            Utils.passedTestLog("Agent successfully navigated to the Title tab");
         } catch (Throwable e) {
-            Utils.failedTestLog("There is an issue in navigating title tab" + e.getMessage());
+            Utils.failedTestLog("Agent navigation to the title tab Failed");
             ScreenShotCapture.importScreenToReports("Title_Tab");
             e.printStackTrace();
         }
@@ -294,14 +299,14 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
 //        }
 
         try {
-//            List<String> titlesList = Arrays.asList("TID9783","TID9784","TID9785");
+            List<String> titlesList = Arrays.asList("TID9783","TID9784","TID9785");
 
             for(int i=1;i<3;i++) {
                 WebActions.setWaitTime(10000);
                 WebActions.clickOn(titlesAndParcelsTabLocators, "titlesSearchIcon");
                 WebActions.setWaitTime(3000);
-                String titleID = Store.getTitleIds().get(i);
-//                String titleID=titlesList.get(i);
+//                String titleID = Store.getTitleIds().get(i);
+                String titleID=titlesList.get(i);
                 if(i>0)
                 {
                     WebActions.clearText(titlesAndParcelsTabLocators, "titleIdTextBox");
@@ -311,8 +316,8 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
                 String actualTitleID = WebActions.getValueAttribute(titlesAndParcelsTabLocators, "titleIdTextBox");
                 System.out.println("TitleId:" + titleID);
                 System.out.println("ActualTitleId:" + actualTitleID);
-                Utils.stepInfoLog("The selected Title is: " + titleID);
-                Utils.stepInfoLog("The Actual Title entered is: " + actualTitleID);
+//                Utils.stepInfoLog("Selected Title ID: " + titleID + "\nActual Title entered: " + actualTitleID);
+
                 System.out.println("add-titles-search");
                 WebActions.clickOn(titlesAndParcelsTabLocators, "addTitlesSearchIcon");
                 WebActions.setWaitTime(6000);
@@ -329,11 +334,11 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
                 WebActions.JSclickOn(titlesAndParcelsTabLocators, "titleAddButton");
                 Assert.assertEquals("The values are not equal!", titleID, actualTitleID);
 
-                Utils.passedTestLog("Title is added sucessfully");
+                Utils.passedTestLog("Title Id :"+actualTitleID+ " is added successfully");
             }
 
         } catch (Throwable e) {
-            Utils.failedTestLog("There is a issues in adding title" + e.getMessage());
+            Utils.failedTestLog("Title addition failed");
             ScreenShotCapture.importScreenToReports("Add_Title");
             e.printStackTrace();
         }
@@ -346,7 +351,7 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.clickOn(partiesTabLocators, "partiesTab");
             Utils.passedTestLog("Agent is navigated to the party tab");
         } catch (Throwable e) {
-            Utils.failedTestLog("There is a issues in navigating to Party tab" + e.getMessage());
+            Utils.failedTestLog("Agent navigation to the Party tab failed");
             ScreenShotCapture.importScreenToReports("Add_Title");
             e.printStackTrace();
         }
@@ -359,7 +364,7 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.clickOn(partiesTabLocators, "partiesSearchIcon");
             Utils.passedTestLog("Add parties pop-up is displayed");
         } catch (Throwable e) {
-            Utils.failedTestLog("There is a issues in opening add parties tab" + e.getMessage());
+            Utils.failedTestLog("Add parties tab is not opened");
             ScreenShotCapture.importScreenToReports("Party_popup");
             e.printStackTrace();
         }
@@ -374,7 +379,6 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.enterTextOn(partiesTabLocators, "partiesNameTextbox",
                     JSONReader.getJSONDataBlockKey("PartiesData", "Party", "name"));
             String partyName = JSONReader.getJSONDataBlockKey("PartiesData", "Party", "name");
-            Utils.stepInfoLog("The selected Party name is:" + partyName);
             WebActions.setWaitTime(1000);
             WebActions.clickOn(partiesTabLocators, "selectPartiesSearchIcon");
             WebActions.setWaitTime(5000);
@@ -382,9 +386,9 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.performTabAndSpace(15);
             WebActions.clickOn(partiesTabLocators, "addPartiesButton");
             WebActions.setWaitTime(2000);
-            Utils.passedTestLog("Party is added sucessfully");
+            Utils.passedTestLog("Party is added successfully");
         } catch (Throwable e) {
-            Utils.failedTestLog("There is a issues in creating parties" + e.getMessage());
+            Utils.failedTestLog("Party addition failed");
             ScreenShotCapture.importScreenToReports("Add_party");
             e.printStackTrace();
         }
@@ -398,7 +402,7 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.setWaitTime(3000);
             Utils.passedTestLog("Agent is navigated to the service tab");
         } catch (Throwable e) {
-            Utils.failedTestLog("There is a issues in navigating to the Service Tab" + e.getMessage());
+            Utils.failedTestLog("Agent navigation to the Service Tab failed");
             ScreenShotCapture.importScreenToReports("Service_Tab");
             e.printStackTrace();
         }
@@ -413,7 +417,6 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.enterTextOn(servicesTabLocators, "searchServicesBox",
                     JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "serviceName"));
             String serviceName = JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "serviceName");
-            Utils.stepInfoLog("The selected service name is: " + serviceName);
             WebActions.clickOn(servicesTabLocators, "addServiceValue");
             WebActions.setWaitTime(2000);
             WebActions.performESCFunction(1);
@@ -427,6 +430,10 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.performTab(1);
             WebActions.JSclickOn(servicesTabLocators, "RRRDropDownBox");
             WebActions.setWaitTime(1000);
+//            listofRRR= READ
+//                    random.chpice
+//                            string.repl
+
             WebActions.JSclickOn(servicesTabLocators, "RRRValueSelect");
             WebActions.clickOn(servicesTabLocators, "rightHolders");
 //            WebActions.clickOn(servicesTabLocators, "rightHoldersValue");
@@ -440,32 +447,54 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.JSclickOn(servicesTabLocators, "effectiveDate");
             WebActions.setWaitTime(1000);
             WebActions.performEnter(1);
+            WebActions.setWaitTime(1000);
             WebActions.JSclickOn(servicesTabLocators, "expiryData");
+            WebActions.setWaitTime(1000);
             WebActions.performRightArrow(10);
             WebActions.performEnter(1);
             //typebox - error
-//			WebActions.clickOn(servicesTabLocators, "typeBox");
-//			WebActions.enterTextOn(servicesTabLocators, "filterBox",
-//					JSONReader.getJSONDataBlockKey("ServiceData", "Service", "typeValue"));
-//			WebActions.clickOn(servicesTabLocators, "typeValue");
-//			WebActions.performESCFunction(1);
-////			System.out.println("check type value");
-////			WebActions.performEnter(1);
-//			String TypeValue = JSONReader.getJSONDataBlockKey("ServiceData", "Service", "typeValue");
-//			Utils.stepInfoLog("The selected type value is: " +TypeValue);
+//            try {
+//                WebActions.clickOn(servicesTabLocators, "typeBox");
+//                WebActions.enterTextOn(servicesTabLocators, "filterBox",
+//                        JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "typeValue"));
+//                WebActions.clickOn(servicesTabLocators, "typeValue");
+//                WebActions.performESCFunction(1);
+//                System.out.println("check type value");
+//                WebActions.performEnter(1);
+//            }
+//            catch (Throwable e) {
+//                Utils.failedTestLog("There is an issue in entering a value for type : " + " " + e.getMessage());
+//                ScreenShotCapture.importScreenToReports("Issue_entering_type");
+//                Assert.fail("There is an issue in entering a value for type" + " " + e.getMessage());
+//                e.printStackTrace();
+//            }
+            WebActions.clickOn(servicesTabLocators, "typeBox");
+            WebActions.clickOn(servicesTabLocators, "typeValue");
+//            WebActions.performESCFunction(1);
+//            System.out.println("check type value");
+//            WebActions.performEnter(1);
+			String TypeValue = JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "typeValue");
+
             WebActions.clickOn(servicesTabLocators, "amountField");
-            WebActions.enterTextOn(servicesTabLocators, "amountField",
-                    JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "amountValue"));
-            String amountValue = JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "amountValue");
-            Utils.stepInfoLog("The selected amount value is: " + amountValue);
+            String expectedAmountValue = faker.getAmount();
+            WebActions.enterTextOn(servicesTabLocators, "amountField",expectedAmountValue);
+            //String amountValue = JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "amountValue");
+
             WebActions.setWaitTime(1000);
             WebActions.clickOn(servicesTabLocators, "documentSearchIcon");
             WebActions.setWaitTime(4000);
             WebActions.JSclickOn(servicesTabLocators, "documentIDTextBox");
-            WebActions.enterTextOn(servicesTabLocators, "documentIDTextBox",
-                    JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "documentId"));
-            String documentID = JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "documentId");
-            Utils.stepInfoLog("The selected documentId is: " + documentID);
+            String expectedDocumentValue = faker.getMortgageDocument();
+            WebActions.enterTextOn(servicesTabLocators, "documentIDTextBox",expectedDocumentValue);
+           // String documentID = JSONReader.getJSONDataBlockKey("ServiceData", "MortgageService", "documentId");
+            Utils.stepInfoLog(
+                    "Selected details:<br>" +
+                            "Service Name: " + serviceName + "<br>" +
+                            "Type Value: " + TypeValue + "<br>" +
+                            "Amount Value: " + expectedAmountValue + "<br>" +
+                            "Document ID: " + expectedDocumentValue
+            );
+
             WebActions.setWaitTime(1000);
             WebActions.JSclickOn(servicesTabLocators, "documentTextBoxSearchIcon");
             WebActions.setWaitTime(4000);
@@ -501,12 +530,12 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             System.out.println("Close Validate button");
             WebActions.performEnter(1);
 //			WebActions.JSclickOn(servicesTabLocators, "ServiceValidationCloseButton");
-//			Utils.passedTestLog("Service is added sucessfully");
+			Utils.passedTestLog("Mortgage Registration Service is added successfully");
 
         } catch (Throwable e) {
-            Utils.failedTestLog("There is an issue in adding a service: " + " " + e.getMessage());
-            ScreenShotCapture.importScreenToReports("Add_service");
-            Assert.fail("Different validation message is displayed: " + " " + e.getMessage());
+            Utils.failedTestLog("Addition of Mortgage registration service is failed");
+            ScreenShotCapture.importScreenToReports("Add_mortgage_registration_service");
+            Assert.fail("Different validation message is displayed");
             e.printStackTrace();
         }
     }
@@ -520,7 +549,7 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.enterTextOn(servicesTabLocators, "searchServicesBox",
                     JSONReader.getJSONDataBlockKey("ServiceData", "LeaseService", "serviceName"));
             String serviceName = JSONReader.getJSONDataBlockKey("ServiceData", "LeaseService", "serviceName");
-            Utils.stepInfoLog("The selected service name is: " + serviceName);
+
             WebActions.clickOn(servicesTabLocators, "addServiceValue");
             WebActions.setWaitTime(2000);
             WebActions.performESCFunction(1);
@@ -541,6 +570,8 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.setWaitTime(1000);
             WebActions.JSclickOn(servicesTabLocators, "LeaseRRRValueSelect");
             WebActions.clickOn(servicesTabLocators, "LeaseRightHolders");
+            WebActions.performEnter(1);
+            WebActions.performDownArrow(1);
             WebActions.performEnter(1);
             WebActions.performTab(1);
             //WebActions.clickOn(servicesTabLocators, "LeaseRightHoldersValue");
@@ -567,20 +598,20 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
 //        String TypeValue = JSONReader.getJSONDataBlockKey("ServiceData", "Service", "typeValue");
 //        Utils.stepInfoLog("The selected type value is: " +TypeValue);
             WebActions.clickOn(servicesTabLocators, "LeaseAmountField");
-            WebActions.enterTextOn(servicesTabLocators, "LeaseAmountField",
-                    JSONReader.getJSONDataBlockKey("ServiceData", "LeaseService", "amountValue"));
-            String amountValue = JSONReader.getJSONDataBlockKey("ServiceData", "LeaseService", "amountValue");
-            Utils.stepInfoLog("The selected amount value is: " + amountValue);
+            String expectedAmountValue = faker.getAmount();
+            WebActions.enterTextOn(servicesTabLocators, "LeaseAmountField", expectedAmountValue);
+            //String amountValue = JSONReader.getJSONDataBlockKey("ServiceData", "LeaseService", "amountValue");
+
             WebActions.setWaitTime(1000);
 
             //Add - conditions
             WebActions.JSclickOn(servicesTabLocators, "LeaseAddCondition");
             WebActions.clickOn(servicesTabLocators, "LeaseAddConditionName");
-            WebActions.enterTextOn(servicesTabLocators, "LeaseAddConditionName",
-                    JSONReader.getJSONDataBlockKey("ServiceData", "LeaseService", "conditionName"));
+            String expectedConditionName = faker.getConditionName();
+            WebActions.enterTextOn(servicesTabLocators, "LeaseAddConditionName",expectedConditionName);
             WebActions.clickOn(servicesTabLocators, "LeaseAddConditionDescription");
-            WebActions.enterTextOn(servicesTabLocators, "LeaseAddConditionDescription",
-                    JSONReader.getJSONDataBlockKey("ServiceData", "LeaseService", "conditionDescription"));
+            String expectedConditionDescription = faker.getConditionDescription();
+            WebActions.enterTextOn(servicesTabLocators, "LeaseAddConditionDescription",expectedConditionDescription);
             WebActions.JSclickOn(servicesTabLocators, "LeaseAddConditionSave");
             WebActions.performESCFunction(1);
 
@@ -588,10 +619,15 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.clickOn(servicesTabLocators, "LeaseDocumentSearchIcon");
             WebActions.setWaitTime(4000);
             WebActions.JSclickOn(servicesTabLocators, "documentIDTextBox");
-            WebActions.enterTextOn(servicesTabLocators, "documentIDTextBox",
-                    JSONReader.getJSONDataBlockKey("ServiceData", "LeaseService", "documentId"));
-            String documentID = JSONReader.getJSONDataBlockKey("ServiceData", "LeaseService", "documentId");
-            Utils.stepInfoLog("The selected documentId is: " + documentID);
+            String expectedDocumentValue = faker.getLeaseDocument();
+            WebActions.enterTextOn(servicesTabLocators, "documentIDTextBox",expectedDocumentValue);
+            //String documentID = JSONReader.getJSONDataBlockKey("ServiceData", "LeaseService", "documentId");
+            Utils.stepInfoLog(
+                    "Selected details:<br>" +
+                            "Service Name: " + serviceName + "<br>" +
+                            "Amount Value: " + expectedAmountValue + "<br>" +
+                            "Document ID: " + expectedDocumentValue
+            );
             WebActions.setWaitTime(1000);
             WebActions.JSclickOn(servicesTabLocators, "documentTextBoxSearchIcon");
             WebActions.setWaitTime(4000);
@@ -628,12 +664,12 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             System.out.println("Close Validate button");
             WebActions.performEnter(1);
 //        WebActions.JSclickOn(servicesTabLocators, "ServiceValidationCloseButton");
-            Utils.passedTestLog("Service is added sucessfully");
+            Utils.passedTestLog("Lease Registration Service is added successfully");
 
         } catch (Throwable e) {
-            Utils.failedTestLog("There is an issue in adding a service: " + " " + e.getMessage());
-            ScreenShotCapture.importScreenToReports("Add_service");
-            Assert.fail("Different validation message is displayed: " + " " + e.getMessage());
+            Utils.failedTestLog("Addition of Lease registration service is failed");
+            ScreenShotCapture.importScreenToReports("Add_lease_service");
+            Assert.fail("Different validation message is displayed");
             e.printStackTrace();
         }
     }
@@ -647,7 +683,6 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.enterTextOn(servicesTabLocators, "searchServicesBox",
                     JSONReader.getJSONDataBlockKey("ServiceData", "TransferOfOwnershipService", "serviceName"));
             String serviceName = JSONReader.getJSONDataBlockKey("ServiceData", "TransferOfOwnershipService", "serviceName");
-            Utils.stepInfoLog("The selected service name is: " + serviceName);
             WebActions.clickOn(servicesTabLocators, "addServiceValue");
             WebActions.setWaitTime(2000);
             WebActions.performESCFunction(1);
@@ -667,10 +702,9 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.setWaitTime(1000);
             WebActions.JSclickOn(servicesTabLocators, "TransferOfOwnershipRRRValueSelect");
             WebActions.clickOn(servicesTabLocators, "TransferOfOwnershipDeclaredValue");
-            WebActions.enterTextOn(servicesTabLocators, "TransferOfOwnershipDeclaredValue",
-                    JSONReader.getJSONDataBlockKey("ServiceData", "TransferOfOwnershipService", "amountValue"));
-            String amountValue = JSONReader.getJSONDataBlockKey("ServiceData", "TransferOfOwnershipService", "amountValue");
-            Utils.stepInfoLog("The selected amount value is: " + amountValue);
+            String expectedDeclaredValue = faker.getAmount();
+            WebActions.enterTextOn(servicesTabLocators, "TransferOfOwnershipDeclaredValue",expectedDeclaredValue);
+            //String amountValue = JSONReader.getJSONDataBlockKey("ServiceData", "TransferOfOwnershipService", "amountValue");
             WebActions.setWaitTime(1000);
             //select shares
             WebActions.clickOn(servicesTabLocators, "TransferOfOwnershipRightHolders");
@@ -681,10 +715,17 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.clickOn(servicesTabLocators, "TransferOfOwnershipDocumentSearchIcon");
             WebActions.setWaitTime(4000);
             WebActions.JSclickOn(servicesTabLocators, "documentIDTextBox");
+            String expectedDocumentValue = faker.getTransferOfOwnershipDocument();
             WebActions.enterTextOn(servicesTabLocators, "documentIDTextBox",
-                    JSONReader.getJSONDataBlockKey("ServiceData", "TransferOfOwnershipService", "documentId"));
-            String documentID = JSONReader.getJSONDataBlockKey("ServiceData", "TransferOfOwnershipService", "documentId");
-            Utils.stepInfoLog("The selected documentId is: " + documentID);
+                    expectedDocumentValue);
+            //String documentID = JSONReader.getJSONDataBlockKey("ServiceData", "TransferOfOwnershipService", "documentId");
+            Utils.stepInfoLog(
+                    "Selected details:<br>" +
+                            "Service Name: " + serviceName + "<br>" +
+                            "Amount Value: " + expectedDeclaredValue + "<br>" +
+                            "Document ID: " + expectedDocumentValue
+            );
+
             WebActions.setWaitTime(1000);
             WebActions.JSclickOn(servicesTabLocators, "documentTextBoxSearchIcon");
             WebActions.setWaitTime(4000);
@@ -719,12 +760,12 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             System.out.println("Close Validate button");
             WebActions.performEnter(1);
 //          WebActions.JSclickOn(servicesTabLocators, "ServiceValidationCloseButton");
-            Utils.passedTestLog("Service is added sucessfully");
+            Utils.passedTestLog("Transfer of Ownership Service is added successfully");
 
         } catch (Throwable e) {
-            Utils.failedTestLog("There is an issue in adding a service: " + " " + e.getMessage());
-            ScreenShotCapture.importScreenToReports("Add_service");
-            Assert.fail("Different validation message is displayed: " + " " + e.getMessage());
+            Utils.failedTestLog("Addition of Transfer of ownership service is failed");
+            ScreenShotCapture.importScreenToReports("Add_TransferOfOwnership_service");
+            Assert.fail("Different validation message is displayed");
             e.printStackTrace();
         }
     }
@@ -759,9 +800,9 @@ public class CreateApplicationStepDef extends FakerClassLibrary {
             WebActions.clickOn(servicesTabLocators, "okButton");
         }
         catch (Throwable e) {
-            Utils.failedTestLog("There is an issue in adding application: " + " " + e.getMessage());
-            ScreenShotCapture.importScreenToReports("Add_application");
-            Assert.fail("Different validation message is displayed: " + " " + e.getMessage());
+            Utils.failedTestLog("Application lodgement failed");
+            ScreenShotCapture.importScreenToReports("lodge_application");
+            Assert.fail("Different validation message is displayed");
             e.printStackTrace();
         }
     }

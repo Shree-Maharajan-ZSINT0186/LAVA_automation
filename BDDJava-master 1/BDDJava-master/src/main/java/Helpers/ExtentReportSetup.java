@@ -10,6 +10,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class ExtentReportSetup {
 	
@@ -29,11 +30,12 @@ public class ExtentReportSetup {
 	//public static Instant timestamp = Instant.now();
 	//public static String currentDate = WebActions.getCurrentDate();
 	// Generate unique timestamp
-	public static String currentDate = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+	public static String currentDate = new SimpleDateFormat("yyyy-MM-dd_HH.mm").format(new Date());
 
 	
     public static void setUpExtentReport() throws IOException {
-    	System.out.println("data:" +currentDate);
+
+		System.out.println("data:" +currentDate);
     	extent = new ExtentReports();
 		ExtentSparkReporter sparkReport = new ExtentSparkReporter("src/reports/LAVA_Regression_Fail_" +currentDate+ ".html");
 		File configFile = new File("src/main/java/Helpers/extent-config.xml");

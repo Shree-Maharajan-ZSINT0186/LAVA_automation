@@ -31,6 +31,7 @@ public class Utils {
 	
     public static void clearFolder() {    	
     	String directoryPath = "src/reports"; // Use forward slashes for paths
+
         Path directory = Paths.get(directoryPath);
 
         if (Files.exists(directory) && Files.isDirectory(directory)) {
@@ -57,8 +58,10 @@ public class Utils {
     
     public static void getAddZip(String path) throws IOException {
 		 String sourceFolderPath = "src//"+path;
-	        String zipFilePath = "src//reports.zip";
-	        try(FileOutputStream fos = new FileOutputStream(zipFilePath)) {
+//	        String zipFilePath = "src//reports.zip";
+		String zipFilePath = "src/reports_" + WebActions.getCurrentDateTime() + ".zip";
+
+		try(FileOutputStream fos = new FileOutputStream(zipFilePath)) {
 	            // Create a ZipOutputStream to write to the FileOutputStream
 	            ZipOutputStream zipOut = new ZipOutputStream(fos);
 	            // Get a list of files and directories in the source folder
@@ -97,47 +100,52 @@ public class Utils {
 	 
     
 	 public static void failedTestLog(String Log) {
-		 String failedMessage = "Failed in step named #"+ WebActions.stepName+ "# --"+ " "+Log; 
-		 String styledFailedMessage = "<span style='color: red; font-weight: bold; font-style: italic;'>" + failedMessage + "</span>";
+		 String failedMessage = "Error occurred in the step: "+ WebActions.stepName+ "\nError Message: "+Log;
+		 String styledFailedMessage = "<span style='color: red;'>" + failedMessage + "</span>";
 		 ExtentReportSetup.test.fail(styledFailedMessage);
 	 }
 	 
 	 public static void WarningTestLog(String Log) {
-		 String warningMessage = "Warning in step named #"+ WebActions.stepName+ "# --"+ " "+Log; 
-		 String styledFailedMessage = "<span style='color: orange; font-weight: bold; font-style: italic;'>" + warningMessage + "</span>";
+		 String warningMessage = "Warning occurred in the step: "+ WebActions.stepName+ "\nWarning Message: "+Log;
+		 String styledFailedMessage = "<span style='color: orange;'>" + warningMessage + "</span>";
 		 ExtentReportSetup.test.warning(styledFailedMessage);
 	 }
 	 
 	 public static void failedSummaryTestLog(String Log) {
 		 String failedMessage = "Scenario Failed: "+Log; 
-		 String styledFailedMessage = "<span style='color: red; font-weight: bold; font-style: italic; font-size:18px;'>" + failedMessage + "</span>";
+		 String styledFailedMessage = "<span style='color: red; font-weight: bold; font-size:18px;'>" + failedMessage + "</span>";
 		 ExtentReportSetup.test.fail(styledFailedMessage);
 	 }
 	 
 	 public static void passedTestLog(String Log) {
-		 String styledPassedMessage = "<span style='color: green; font-weight: bold; font-style: italic;'>" + Log + "</span>";
+		 String styledPassedMessage = "<span style='color: green;'>" + Log + "</span>";
 		 ExtentReportSetup.test.pass(styledPassedMessage);
 	 }
 	 
 	 public static void passedSummaryTestLog(String Log) {
-		 String styledPassedMessage = "<span style='color: green; font-weight: bold; font-style: italic; font-size:18px;'>" + Log + "</span>";
+		 String styledPassedMessage = "<span style='color: green; font-weight: bold;font-size:18px;'>" + Log + "</span>";
 		 ExtentReportSetup.test.pass(styledPassedMessage);
 	 }
 	 
 	 public static void reportHeader(String scenarioName) {
-		 String headerMessage = "<span style='color: white; font-weight: bold; font-style: italic; font-size: 17px;'>" + scenarioName + "</span>";
+		 String headerMessage = "<span style='color: black; font-weight: bold; font-size: 17px;'>" + scenarioName + "</span>";
 		 ExtentReportSetup.test.info(headerMessage);
 	 }
 	 
 	 public static void failedStepInfoLog(String Log) {
-		 String styledInfoMessage = "<span style='color: red; font-weight: bold; font-style: italic;'>" +"Error Occured : "+ Log +"</span>";
+		 String styledInfoMessage = "<span style='color: red;'>" +"Error Occured : "+ Log +"</span>";
 		 ExtentReportSetup.test.info(styledInfoMessage);
 	 }
 	 
 	 public static void stepInfoLog(String Log) {
-		 String styledInfoMessage = "<span style='color: white; font-weight: bold; font-style: italic;'>" + Log +"</span>";
+		 String styledInfoMessage = "<span style='color: black;'>" + Log +"</span>";
 		 ExtentReportSetup.test.info(styledInfoMessage);
 	 }
+
+	public static void highlightedStepInfoLog(String Log) {
+		String styledInfoMessage = "<span style='color: purple ; font-weight: bold; '>" + Log +"</span>";
+		ExtentReportSetup.test.info(styledInfoMessage);
+	}
 	 
 	 public static void getBrowserFailedLog(String sceName) throws IOException {
 		 FileWriter writer = null;

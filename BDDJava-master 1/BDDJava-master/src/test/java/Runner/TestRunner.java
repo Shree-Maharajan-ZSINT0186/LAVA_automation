@@ -33,7 +33,7 @@ import io.cucumber.junit.Cucumber;
 @RunWith(Cucumber.class)
 
 @CucumberOptions(
-		features = "src/test/resources/features/Web", 
+		features = "src/test/resources/features/Web/ExistingTitles_ApproveApplication.feature",
 		glue = "StepDef", 
 		monochrome = true,
 		publish = true,
@@ -65,7 +65,7 @@ public class TestRunner {
         Date date = new Date();    
         sdf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata")); // IST timezone
         WebActions.executionStartDate = sdf.format(date);
-		Utils.clearFolder();
+//		Utils.clearFolder();
 		ExtentReportSetup.setUpExtentReportSummary();
 	    ExtentReportSetup.setUpExtentReport();
 		Map<String, Object> testDataValues=YamlLoader.loadYamlFile("config");
